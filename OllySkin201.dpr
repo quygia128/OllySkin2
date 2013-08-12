@@ -136,9 +136,9 @@ begin
   end;
   asm
     call  InitSkinEngine
-  push  offset FileName
-	call  LoadSkinFromFile
-	call  ApplySkinEngine
+    push  offset FileName
+    call  LoadSkinFromFile
+    call  ApplySkinEngine
   end;
   Writetoini(nil,'OllySkin2','Enable','%i',1);
 end;
