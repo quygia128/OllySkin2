@@ -12,7 +12,7 @@ Library OllySkin201;
 *)
 
 Uses
-  Windows, Messages, skinvar, Skinengine, plugin2;
+  Windows, Messages, skinvar, plugin2;
   
   {$WARN UNSAFE_CODE OFF}
   {$WARN UNSAFE_TYPE OFF}
@@ -99,7 +99,7 @@ begin
   FillChar(OpenFileName, SizeOf(TOpenFileName),0);
   Filter:= Pchar('msstyles Files'+#0+'*.msstyles'+#0+'Skin Files'+#0+'*.skin'+#0+'All Files'+#0+'*.*');
   Title:= PChar('Load Skin');
-  with OpenFileName do begin
+  with OpenFileName do begin  // or you can use function Browsefilename
     lStructSize  := SizeOf(TOpenFileName);
     hInstance    := Inst;
     hWndOwner    := Handle;
@@ -258,7 +258,7 @@ Begin
   Addtolist(0,1,'- OllySkin v1.10 alpha by maluc');
   Addtolist(0,1,'- %s %s by %s. Compiled date: %s', PLUGIN_NAME, PLUGIN_VERS, PLUGIN_AUTH, PLUGIN_DATE);
   Addtolist(0,2,' - Email: %s',PLUGIN_EMAI);
-  Addtolist(0,2,' ');
+  Addtolist(0,2,' - ');
   Result:= 0;
 End;
 
