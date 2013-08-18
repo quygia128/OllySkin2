@@ -2,17 +2,17 @@ Library OllySkin201;
 
 (*
 - Plugin Name:
-  .OllySkin v1.10 by maluc power by MASM32
+  .OllySkin v1.01 by maluc power by MASM32
   .OllySkin v2.01 by quygia128 power by Delphi
 - Email: quygia128@gmail.com
-- Date: 07.29.2013
+- Last edit on: 08.18.2013
 - Credits to KSDev's develop & maluc & TQN & phpbb3 & BOB
 - In OD2 - hexedittext not appear in register menu when apply skin , Sh!t
-- This for fun only (and as an example of plugins for OD2) - not for use
+- This for fun only (and as an example of plugins for OD2) - not for use.
 *)
 
 Uses
-  Windows, Messages, skinvar, plugin2;
+  Windows, Messages, skinvar, Plugin2;
   
   {$WARN UNSAFE_CODE OFF}
   {$WARN UNSAFE_TYPE OFF}
@@ -49,11 +49,11 @@ Var
   filter: PChar;
   Title: PChar;
   FileName: array[0..4095] of Char;
-  skinpath:array[0..MAXPATH] of WChar;
-  skinpath1:array[0..MAXPATH] of Char;
+  skinpathw:array[0..MAXPATH] of WChar;
+  skinpatha:array[0..MAXPATH] of Char;
   oddir: PChar;
   EnableSkinFlag: LongInt;
-  Inst, Handle: Integer;
+  Inst: Integer;
   OpenFileName: TOpenFileName;
 
   procedure InitSkinEngine; stdcall; external 'skinengine.dll';
@@ -70,7 +70,7 @@ Const
   PLUGIN_VERS: PWChar = 'v201.01';
   PLUGIN_AUTH: PWChar = 'quygia128';
   PLUGIN_EMAI: PWChar = 'quygia128@gmail.com';
-  PLUGIN_DATE: PWChar = '07.29.2013';
+  PLUGIN_DATE: PWChar = '08.15.2013';
 
   IDD_DIALOG          = 100;
   IDT_EDIT1           = 1001;
@@ -84,11 +84,19 @@ Const
   OFN_FILEMUSTEXIST   = $00001000;
   OFN_PATHMUSTEXIST   = $00000800;
   OFN_HIDEREADONLY    = $00000004;
+  
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////// Plugin Menu ///////////////////////////////
-MainMenu:array[0..2] of t_menu=(
-  (Name:'Skin Option';help: 'Open Option';shortcutid: 0;menufunc: MP_Mainmenu;submenu: nil;union: (index: 1)),
-  (Name:'|About';help: 'About Plugin';shortcutid: 0;menufunc: MP_Mainmenu;submenu: nil;union: (index: 2)),
+SubMainMenu:array[0..2] of t_menu=(
+  (Name:'Active';help: nil;shortcutid: 0;menufunc: MP_Mainmenu;submenu: nil;menuType: (index: 3)),
+  (Name:'|Disable';help: nil;shortcutid: 0;menufunc: MP_Mainmenu;submenu: nil;menuType: (index: 4)),
+  ()
+  );
+  
+MainMenu:array[0..3] of t_menu=(
+  (Name:'ApplySkin On Open';help: nil;shortcutid: 0;menufunc: nil;submenu:@SubMainMenu;menuType: (hsubmenu: 0)),
+  (Name:'|Option';help: 'Open Option';shortcutid: 0;menufunc: MP_Mainmenu;submenu: nil;menuType: (index: 1)),
+  (Name:'About';help: 'About Plugin' ;shortcutid: 0;menufunc: MP_Mainmenu;submenu: nil;menuType: (index: 2)),
   ()
   );
 ////////////////////////////////////////////////////////////////////////////////
@@ -102,7 +110,7 @@ begin
   with OpenFileName do begin  // or you can use function Browsefilename
     lStructSize  := SizeOf(TOpenFileName);
     hInstance    := Inst;
-    hWndOwner    := Handle;
+    hWndOwner    := hwnd;
     lpstrFilter  := Filter;
     nFilterIndex := 1;
     nMaxFile     := SizeOf(FileName);
@@ -112,8 +120,8 @@ begin
                         OFN_PATHMUSTEXIST or OFN_HIDEREADONLY;
 
     if GetOpenFileNameA(OpenFileName) = True then begin
-      WriteUnicode(OpenFileName.lpstrFile,skinpath,MAXPATH);
-      Writetoini(nil,'OllySkin2','skinPath','%s',skinpath);
+      WriteUnicode(OpenFileName.lpstrFile,skinpathw,MAXPATH);
+      Writetoini(nil,'OllySkin2','skinPath','%s',skinpathw);
       SetDlgItemText(hwnd,IDT_EDIT1,OpenFileName.lpstrFile);
       Result:= True;
     end else Result:= False;
@@ -131,8 +139,8 @@ begin
       if oddir[i] <> '.' then oddir[i]:= #0
       else Break;
     end;
-    GetPrivateProfileString('OllySkin2','Skinpath',nil,skinpath1,MAXPATH,lstrcat(oddir,PChar('ini')));
-    for i:= 0 to strlen(skinpath1) do FileName[i]:= skinpath1[i];
+    GetPrivateProfileString('OllySkin2','Skinpath',nil,skinpatha,MAXPATH,lstrcat(oddir,PChar('ini')));
+    for i:= 0 to strlen(skinpatha) do FileName[i]:= skinpatha[i];
   end;
   asm
     call  InitSkinEngine
@@ -157,13 +165,13 @@ begin
     WM_INITDIALOG:
     begin
       oddir:= GetCommandLine;
-      oddir:= Pchar(Mid(oddir,2,lstrlen(oddir)-1));
+      oddir:= Pchar(Mid(oddir,2,lstrlen(oddir)-1)); // copy
       for i:= lstrlen(oddir) downto 1 do begin
         if oddir[i] <> '.' then oddir[i]:= #0
         else Break;
       end;
-      GetPrivateProfileString('OllySkin2','Skinpath',nil,skinpath1,MAXPATH,lstrcat(oddir,PChar('ini')));
-      SetDlgItemText(hWnd,IDT_EDIT1,skinpath1);
+      GetPrivateProfileString('OllySkin2','Skinpath',nil,skinpatha,MAXPATH,lstrcat(oddir,PChar('ini')));
+      SetDlgItemText(hWnd,IDT_EDIT1,skinpatha);
     end;
     WM_LBUTTONDOWN:
     begin
@@ -193,6 +201,18 @@ begin
   case mode of
     MENU_VERIFY: begin
       Result:= MENU_NORMAL;
+      case index of
+        3: begin
+          //
+          Getfromini(nil,'OllySkin2','Enable','%i',@enableskinflag);
+          if enableskinflag = 1 then Result:= MENU_CHECKED;
+        end;
+        4:begin
+          //
+          Getfromini(nil,'OllySkin2','Enable','%i',@enableskinflag);
+          if not(enableskinflag = 1) then Result:= MENU_CHECKED;
+        end;
+      end;
     end;
     MENU_EXECUTE: begin
       Suspendallthreads;
@@ -207,7 +227,7 @@ begin
           n:= StrlenW(info,TEXTLEN);
           Swprintf(info+n,'skinengine.dll - Copyright (c) by KSDev'#10#10);
           n:= StrlenW(info,TEXTLEN);
-          Swprintf(info+n,'OllySkin v1.10 by maluc'#10#10);
+          Swprintf(info+n,'OllySkin v1.01 by maluc'#10#10);
           n:= StrlenW(info,TEXTLEN);
           Swprintf(info+n,'OllySkin v2.01 by %s'#10'Email: %s'#10#10,PLUGIN_AUTH, PLUGIN_EMAI);
           n:= StrlenW(info,TEXTLEN);
@@ -216,6 +236,15 @@ begin
           Swprintf(info+n,'Special thanks to TQN ~ phpbb3 ~ BOB'#10);
           AboutSkinEngine; { -Not disable this line please- }
           MessageBoxW(oddata.hwollymain^,info,'About OllySkin',MB_OK);
+        end;
+        3:begin
+          Writetoini(nil,'OllySkin2','Enable','%i',1);
+        end;
+        4:begin
+          Writetoini(nil,'OllySkin2','Enable','%i',0);
+        end;
+        5:begin
+          // Not yet
         end;
       end;
       Resumeallthreads;
@@ -255,7 +284,7 @@ Begin
   oddata:= Getoddata(OD2hModule);
   Getfromini(nil,'OllySkin2','Enable','%i',@enableskinflag);
   if enableskinflag = 1 then SetSkin;
-  Addtolist(0,1,'- OllySkin v1.10 alpha by maluc');
+  Addtolist(0,1,'- OllySkin v1.01 alpha by maluc');
   Addtolist(0,1,'- %s %s by %s. Compiled date: %s', PLUGIN_NAME, PLUGIN_VERS, PLUGIN_AUTH, PLUGIN_DATE);
   Addtolist(0,2,' - Email: %s',PLUGIN_EMAI);
   Addtolist(0,2,' - ');
