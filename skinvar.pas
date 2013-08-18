@@ -8,7 +8,9 @@ uses
   {$WARN UNSAFE_CODE OFF}
   {$WARN UNSAFE_TYPE OFF}
   {$WARN UNSAFE_CAST OFF}
-
+  
+var
+  SelfInst:                         HINST;
   function Mid(Str: string; From, Size: Word): string;
   function StrLen(Str: string): DWORD; assembler;//This code from BOB in WinMax2
   function Min(const A, B: DWORD): DWORD;
@@ -50,6 +52,23 @@ begin
   Val(S, Result, E);
 end;
 
+function IntToHex(Int: DWord; Digit: byte): string;
+var
+  OutStr: array[0..9] of Char;
+  FmtStr: string;
+begin
+  FmtStr:= '%'+ IntToStr(Digit)+'.'+ IntToStr(Digit) +'X'+#0;
+  asm
+    push  Int
+    push  FmtStr;
+    lea   eax, OutStr[0]
+    push  eax
+    call  wsprintfA
+    add   esp, 4*3
+  end;
+  Result:= string(OutStr);
+end;
+
 function Mid(Str: string; From, Size: Word): string;
 var
   i: Word;
@@ -59,7 +78,7 @@ Begin
   if Size < 1 then goto Ex;
   if from = 0 then inc(from);
   for i:= from to (from + size-1) do
-    Result:= Result + Str[i];
+  Result:= Result + Str[i];
   Ex:
 End;
 
