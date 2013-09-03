@@ -35,13 +35,13 @@ Unit Plugin2;
 //                                                                            //
 // Porting from Cplus header to unit delphi by quygia128                      //
 // Email: quygia128@gmail.com                                                 //
-// Home: http://.cin1team.biz                                                 //
-// Last edit on: 08.18.2013                                                   //
+// Home: http://cin1team.biz                                                  //
+// Last edit on: 08.27.2013                                                   //
 // Special thanks & Credits go to TQN ~ phpbb3 ~ BOB                          //
 // Greetz to all my friends                                                   //
 // -----                                                                      //
 // For plugin power by delphi (Test IDE: Delphi 7 & Delphi 2010)              //
-//                                                                            //
+// Check for update: https://github.com/quygia128                             //
 //                                                                            //
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -49,7 +49,7 @@ Interface
 
 Uses
   Windows;
-  {$A1}                                   // Struct byte alignment
+  {$A1}                                 // Struct byte alignment
   {$WARN UNSAFE_CODE OFF}
   {$WARN UNSAFE_TYPE OFF}
   {$WARN UNSAFE_CAST OFF}
@@ -177,48 +177,48 @@ TCompareex = function(p1:Pointer;p2:Pointer;n:ULong): LongInt; cdecl;
 procedure    Error(format:PWChar); cdecl; varargs; external OLLYDBG name 'Error';
 procedure    Conderror(cond:PWChar;title:PWChar;format:PWChar); cdecl; varargs; external OLLYDBG name 'Conderror';
 function     Condyesno(cond:LongInt;title:PWChar;format:PWChar): LongInt; cdecl; varargs; external OLLYDBG name 'Condyesno';
-function     Stringfromini(section:PWChar;key:PWChar;s:PWChar;length:LongInt): LongInt; stdcall; external OLLYDBG name 'Stringfromini';
-function     Filefromini(key:PWChar;name:PWChar;defname:PWChar): LongInt; stdcall; external OLLYDBG name 'Filefromini';
+function     Stringfromini(section:PWChar;key:PWChar;s:PWChar;length:LongInt): LongInt; cdecl; external OLLYDBG name 'Stringfromini';
+function     Filefromini(key:PWChar;name:PWChar;defname:PWChar): LongInt; cdecl; external OLLYDBG name 'Filefromini';
 function     Getfromini(ifile:PWChar;section:PWChar;key:PWChar;format:PWChar): LongInt; cdecl; varargs; external OLLYDBG name 'Getfromini';
 function     Writetoini(ifile:PWChar;section:PWChar;key:PWChar;format:PWChar): LongInt; cdecl; varargs; external OLLYDBG name 'Writetoini';
-function     Filetoini(key:PWChar;name:PWChar): LongInt; stdcall; external OLLYDBG name 'Filetoini';
-procedure    Deleteinisection(ifile:PWChar;section:PWChar); stdcall; external OLLYDBG name 'Deleteinisection';
-function     Getfromsettings(key:PWChar;defvalue:LongInt): LongInt; stdcall; external OLLYDBG name 'Getfromsettings';
-procedure    Addtosettings(key:PWChar;value:LongInt); stdcall; external OLLYDBG name 'Addtosettings';
-procedure    Replacegraphs(mode:LongInt;s:PWChar;mask:PUChar;select:LongInt;n:LongInt); stdcall; external OLLYDBG name 'Replacegraphs';
+function     Filetoini(key:PWChar;name:PWChar): LongInt; cdecl; external OLLYDBG name 'Filetoini';
+procedure    Deleteinisection(ifile:PWChar;section:PWChar); cdecl; external OLLYDBG name 'Deleteinisection';
+function     Getfromsettings(key:PWChar;defvalue:LongInt): LongInt; cdecl; external OLLYDBG name 'Getfromsettings';
+procedure    Addtosettings(key:PWChar;value:LongInt); cdecl; external OLLYDBG name 'Addtosettings';
+procedure    Replacegraphs(mode:LongInt;s:PWChar;mask:PUChar;select:LongInt;n:LongInt); cdecl; external OLLYDBG name 'Replacegraphs';
 
-function     Unicodetoascii(const w:PWChar;nw:LongInt;s:char;ns:LongInt): LongInt; stdcall; external OLLYDBG name 'Unicodetoascii';
-function     Asciitounicode(const s:PChar;ns:LongInt;w:PWChar;nw:LongInt): LongInt; stdcall; external OLLYDBG name 'Asciitounicode';
-function     Unicodetoutf(const  w:PWChar;nw:LongInt;t:PChar;nt:LongInt): LongInt; stdcall; external OLLYDBG name 'Unicodetoutf';
-function     Utftounicode(const t:PChar;nt:LongInt;w:PWChar;nw:LongInt): LongInt; stdcall; external OLLYDBG name 'Utftounicode';
-function     Unicodebuffertoascii(hunicode:HGLOBAL):HGLOBAL; stdcall; external OLLYDBG name 'Unicodebuffertoascii';
-function     Iszero(data:PWChar;n:LongInt): LongInt; stdcall; external OLLYDBG name 'Iszero';
-function     Guidtotext(guid:PUChar;s:PWChar): LongInt; stdcall; external OLLYDBG name 'Guidtotext';
+function     Unicodetoascii(const w:PWChar;nw:LongInt;s:char;ns:LongInt): LongInt; cdecl; external OLLYDBG name 'Unicodetoascii';
+function     Asciitounicode(const s:PChar;ns:LongInt;w:PWChar;nw:LongInt): LongInt; cdecl; external OLLYDBG name 'Asciitounicode';
+function     Unicodetoutf(const  w:PWChar;nw:LongInt;t:PChar;nt:LongInt): LongInt; cdecl; external OLLYDBG name 'Unicodetoutf';
+function     Utftounicode(const t:PChar;nt:LongInt;w:PWChar;nw:LongInt): LongInt; cdecl; external OLLYDBG name 'Utftounicode';
+function     Unicodebuffertoascii(hunicode:HGLOBAL):HGLOBAL; cdecl; external OLLYDBG name 'Unicodebuffertoascii';
+function     Iszero(data:PWChar;n:LongInt): LongInt; cdecl; external OLLYDBG name 'Iszero';
+function     Guidtotext(guid:PUChar;s:PWChar): LongInt; cdecl; external OLLYDBG name 'Guidtotext';
 function     Swprintf(s:PWChar;format:PWChar): LongInt; cdecl; varargs; external OLLYDBG name 'Swprintf';
-function     Memalloc(size:ULong;flags:LongInt): Pointer; stdcall; external OLLYDBG name 'Memalloc';
-procedure    Memfree(data:Pointer); stdcall; external OLLYDBG name 'Memfree';
-function  	 Mempurge(data:Pointer;count:LongInt;itemsize:ULong;newcount:LongInt): Pointer; stdcall; external OLLYDBG name 'Mempurge';
-function     Memdouble(data:Pointer;pcount:LongInt;itemsize:ULong;failed:LongInt;flags:LongInt): Pointer; stdcall; external OLLYDBG name 'Memdouble';
-function     Virtalloc(size:ULong;flags:LongInt): Pointer; stdcall; external OLLYDBG name 'Virtalloc';
-procedure    Virtfree(data:Pointer); stdcall; external OLLYDBG name 'Virtfree';
-function     Broadcast(msg:UINT;wp:WPARAM;lp:LPARAM): LongInt; stdcall; external OLLYDBG name 'Broadcast';
+function     Memalloc(size:ULong;flags:LongInt): Pointer; cdecl; external OLLYDBG name 'Memalloc';
+procedure    Memfree(data:Pointer); cdecl; external OLLYDBG name 'Memfree';
+function  	 Mempurge(data:Pointer;count:LongInt;itemsize:ULong;newcount:LongInt): Pointer; cdecl; external OLLYDBG name 'Mempurge';
+function     Memdouble(data:Pointer;pcount:LongInt;itemsize:ULong;failed:LongInt;flags:LongInt): Pointer; cdecl; external OLLYDBG name 'Memdouble';
+function     Virtalloc(size:ULong;flags:LongInt): Pointer; cdecl; external OLLYDBG name 'Virtalloc';
+procedure    Virtfree(data:Pointer); cdecl; external OLLYDBG name 'Virtfree';
+function     Broadcast(msg:UINT;wp:WPARAM;lp:LPARAM): LongInt; cdecl; external OLLYDBG name 'Broadcast';
 function     Browsefilename(title:PWChar;name:PWChar;args:PWChar;
-                            currdir:PWChar;defext:PWChar;hwnd:HWND;mode:LongInt): LongInt; stdcall; external OLLYDBG name 'Browsefilename';
-function     Browsedirectory(hw:HWND;comment:PWChar;dir:PWChar): LongInt; stdcall; external OLLYDBG name 'Browsedirectory';
-procedure    Relativizepath(path:PWChar); stdcall; external OLLYDBG name 'Relativizepath';
-procedure    Absolutizepath(path:PWChar); stdcall; external OLLYDBG name 'Absolutizepath';
-function     Confirmoverwrite(path:PWChar): LongInt; stdcall; external OLLYDBG name 'Confirmoverwrite';
+                            currdir:PWChar;defext:PWChar;hwnd:HWND;mode:LongInt): LongInt; cdecl; external OLLYDBG name 'Browsefilename';
+function     Browsedirectory(hw:HWND;comment:PWChar;dir:PWChar): LongInt; cdecl; external OLLYDBG name 'Browsedirectory';
+procedure    Relativizepath(path:PWChar); cdecl; external OLLYDBG name 'Relativizepath';
+procedure    Absolutizepath(path:PWChar); cdecl; external OLLYDBG name 'Absolutizepath';
+function     Confirmoverwrite(path:PWChar): LongInt; cdecl; external OLLYDBG name 'Confirmoverwrite';
 function     Labeladdress(text:PWChar;addr:ULong;reladdr:ULong;relreg:LongInt;
-                          index:LongInt;mask:PUChar;select:PInteger;mode:ULong): LongInt; stdcall; external OLLYDBG name 'Labeladdress';
-function     Simpleaddress(text:PWChar;addr:ULong;mask:PUChar;select:PInteger): LongInt; stdcall; external OLLYDBG name 'Simpleaddress';					
-procedure    Heapsort(data:Pointer;const count:integer;const size:LongInt;compare:TCompare); stdcall; external OLLYDBG name 'Heapsort';
-procedure    Heapsortex(data:Pointer;const count:integer;const size:LongInt;compareex:TCompareex;lp:ulong); stdcall; external OLLYDBG name 'Heapsortex';
-function 	 _Readfile(path:PWChar;fixsize:ULong;psize:PULong):PUChar; stdcall; external OLLYDBG name 'Readfile';
-function     Devicenametodosname(devname:PWChar;dosname:PWChar): LongInt; stdcall; external OLLYDBG name 'Devicenametodosname';
-function     Filenamefromhandle(hfile:HWND;path:PWChar): LongInt; stdcall; external OLLYDBG name 'Filenamefromhandle';
-procedure    Quicktimerstart(timer:LongInt); stdcall; external OLLYDBG name 'Quicktimerstart';
-procedure    Quicktimerstop(timer:LongInt); stdcall; external OLLYDBG name 'Quicktimerstop';
-procedure    Quicktimerflush(timer:LongInt); stdcall; external OLLYDBG name 'Quicktimerflush';
+                          index:LongInt;mask:PUChar;select:PInteger;mode:ULong): LongInt; cdecl; external OLLYDBG name 'Labeladdress';
+function     Simpleaddress(text:PWChar;addr:ULong;mask:PUChar;select:PInteger): LongInt; cdecl; external OLLYDBG name 'Simpleaddress';					
+procedure    Heapsort(data:Pointer;const count:integer;const size:LongInt;compare:TCompare); cdecl; external OLLYDBG name 'Heapsort';
+procedure    Heapsortex(data:Pointer;const count:integer;const size:LongInt;compareex:TCompareex;lp:ulong); cdecl; external OLLYDBG name 'Heapsortex';
+function 	 _Readfile(path:PWChar;fixsize:ULong;psize:PULong):PUChar; cdecl; external OLLYDBG name 'Readfile';
+function     Devicenametodosname(devname:PWChar;dosname:PWChar): LongInt; cdecl; external OLLYDBG name 'Devicenametodosname';
+function     Filenamefromhandle(hfile:HWND;path:PWChar): LongInt; cdecl; external OLLYDBG name 'Filenamefromhandle';
+procedure    Quicktimerstart(timer:LongInt); cdecl; external OLLYDBG name 'Quicktimerstart';
+procedure    Quicktimerstop(timer:LongInt); cdecl; external OLLYDBG name 'Quicktimerstop';
+procedure    Quicktimerflush(timer:LongInt); cdecl; external OLLYDBG name 'Quicktimerflush';
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////// FAST SERVICE ROUTINES WRITTEN IN ASSEMBLER //////////////////
@@ -241,7 +241,7 @@ function     HexdumpW(s:PWChar;code:PUChar;n:LongInt): LongInt; cdecl; external 
 function     Bitcount(u:ULong): LongInt; cdecl; external OLLYDBG name 'Bitcount';
 
 function  	 SetcaseA(s:PChar): Pointer; cdecl; external OLLYDBG name 'SetcaseA';
-function 	 SetcaseW(s:PWChar): Pointer; cdecl; external OLLYDBG name 'SetcaseW';
+function 	   SetcaseW(s:PWChar): Pointer; cdecl; external OLLYDBG name 'SetcaseW';
 function     StrcopycaseA(dest:PChar; n:LongInt;const src:Pchar): LongInt; cdecl; external OLLYDBG name 'StrcopycaseA';
 function     StrcopycaseW(dest:PWChar; n:LongInt;const src:PWChar): LongInt; cdecl; external OLLYDBG name 'StrcopycaseW';
 function     StrnstrA(data:PChar;ndata:LongInt;pat:PChar;npat:LongInt;ignorecase:LongInt): LongInt; cdecl; external OLLYDBG name 'StrnstrA';                  
@@ -256,9 +256,9 @@ procedure    Clearfpu; cdecl; external OLLYDBG name 'Clearfpu';
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////// DATA COMPRESSION AND DECOMPRESSION //////////////////////
 
-function   	 Compress(bufin:PUChar;nbufin:ULong;bufout:PUChar;nbufout:ULong): ULong; stdcall; external OLLYDBG name 'Compress';
-function     Getoriginaldatasize(bufin:PUChar;nbufin:ULong): ULong; stdcall; external OLLYDBG name 'Getoriginaldatasize';
-function     Decompress(bufin:PUChar;nbufin:ULong;bufout:PUChar;nbufout:ULong): ULong; stdcall; external OLLYDBG name 'Decompress';
+function   	 Compress(bufin:PUChar;nbufin:ULong;bufout:PUChar;nbufout:ULong): ULong; cdecl; external OLLYDBG name 'Compress';
+function     Getoriginaldatasize(bufin:PUChar;nbufin:ULong): ULong; cdecl; external OLLYDBG name 'Getoriginaldatasize';
+function     Decompress(bufin:PUChar;nbufin:ULong;bufout:PUChar;nbufout:ULong): ULong; cdecl; external OLLYDBG name 'Decompress';
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////// TAGGED DATA FILES AND RESOURCES ////////////////////////
 Const
@@ -332,14 +332,14 @@ P_tagfile= ^t_tagfile;           // Descriptor of tagged file (reading)
     recsize:ULong;               // Size of next accessed record
 	end;
 
-function    Createtaggedfile(name:PWChar;signature:PChar;version:ULong): P_file; stdcall; external OLLYDBG name 'Createtaggedfile';
-function    Savetaggedrecord(f:P_file;tag:ULong;size:ULong;data:Pointer): LongInt; stdcall; external OLLYDBG name 'Savetaggedrecord';
-function    Savepackedrecord(f:P_file;tag:ULong;size:ULong;data:Pointer): LongInt; stdcall; external OLLYDBG name 'Savepackedrecord';
-procedure   Finalizetaggedfile(f:P_file); stdcall; external OLLYDBG name 'Finalizetaggedfile';
-function    Opentaggedfile(tf:P_tagfile;name:PWChar;signature:PChar): LongInt; stdcall; external OLLYDBG name 'Opentaggedfile';
-function    Gettaggedrecordsize(tf:P_tagfile;tag:PULong;size:PULong): LongInt; stdcall; external OLLYDBG name 'Gettaggedrecordsize';
-function    Gettaggedfiledata(tf:P_tagfile;buf:Pointer;bufsize:ULong): ULong; stdcall; external OLLYDBG name 'Gettaggedfiledata';
-procedure   Closetaggedfile(tf:P_tagfile); stdcall; external OLLYDBG name 'Closetaggedfile';
+function    Createtaggedfile(name:PWChar;signature:PChar;version:ULong): P_file; cdecl; external OLLYDBG name 'Createtaggedfile';
+function    Savetaggedrecord(f:P_file;tag:ULong;size:ULong;data:Pointer): LongInt; cdecl; external OLLYDBG name 'Savetaggedrecord';
+function    Savepackedrecord(f:P_file;tag:ULong;size:ULong;data:Pointer): LongInt; cdecl; external OLLYDBG name 'Savepackedrecord';
+procedure   Finalizetaggedfile(f:P_file); cdecl; external OLLYDBG name 'Finalizetaggedfile';
+function    Opentaggedfile(tf:P_tagfile;name:PWChar;signature:PChar): LongInt; cdecl; external OLLYDBG name 'Opentaggedfile';
+function    Gettaggedrecordsize(tf:P_tagfile;tag:PULong;size:PULong): LongInt; cdecl; external OLLYDBG name 'Gettaggedrecordsize';
+function    Gettaggedfiledata(tf:P_tagfile;buf:Pointer;bufsize:ULong): ULong; cdecl; external OLLYDBG name 'Gettaggedfiledata';
+procedure   Closetaggedfile(tf:P_tagfile); cdecl; external OLLYDBG name 'Closetaggedfile';
 
 Type
 
@@ -369,15 +369,16 @@ P_uddsave= ^t_uddsave;           // .udd file descriptor used by plugins
   uddprefix:ULong;               // .udd tag prefix
 	end;
 
-function    Pluginsaverecord(psave:P_uddsave;tag:ULong;size:ULong;data:Pointer): LongInt; stdcall; external OLLYDBG name 'Pluginsaverecord';
-function    Pluginpackedrecord(psave:P_uddsave;tag:ULong;size:ULong;data:Pointer): LongInt; stdcall; external OLLYDBG name 'Pluginpackedrecord';
-procedure   Pluginmodulechanged(addr:ULong); stdcall; external OLLYDBG name 'Pluginmodulechanged';
-function    Plugingetuniquedatatype: LongInt; stdcall; external OLLYDBG name 'Plugingetuniquedatatype';
-function    Plugintempbreakpoint(addr:ULong;bptype:ULong;forceint3:LongInt): LongInt; stdcall; external OLLYDBG name 'Plugintempbreakpoint';
-procedure   Pluginshowoptions(options:P_control); stdcall; external OLLYDBG name 'Pluginshowoptions';
+function    Pluginsaverecord(psave:P_uddsave;tag:ULong;size:ULong;data:Pointer): LongInt; cdecl; external OLLYDBG name 'Pluginsaverecord';
+function    Pluginpackedrecord(psave:P_uddsave;tag:ULong;size:ULong;data:Pointer): LongInt; cdecl; external OLLYDBG name 'Pluginpackedrecord';
+procedure   Pluginmodulechanged(addr:ULong); cdecl; external OLLYDBG name 'Pluginmodulechanged';
+function    Plugingetuniquedatatype: LongInt; cdecl; external OLLYDBG name 'Plugingetuniquedatatype';
+function    Plugintempbreakpoint(addr:ULong;bptype:ULong;forceint3:LongInt): LongInt; cdecl; external OLLYDBG name 'Plugintempbreakpoint';
+procedure   Pluginshowoptions(options:P_control); cdecl; external OLLYDBG name 'Pluginshowoptions';
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////// LEXICAL SCANNER ////////////////////////////////
-const
+
+Const
 SMODE_UPCASE   =$00000001;            // Convert keywords to uppercase
 SMODE_NOEOL    =$00000010;            // Don't report SCAN_EOL, just skip it
 SMODE_NOSPEC   =$00000020;            // Don't translate specsymbols
@@ -426,9 +427,9 @@ P_scan = ^t_scan;                     // Scan descriptor
   sctype:LongInt;                     // Type of last scanned item, SCAN_xxx
   end;
 
-function     Skipspaces(ps:P_scan): LongInt; stdcall; external OLLYDBG name 'Skipspaces';
-procedure    Scan(ps:P_scan); stdcall; external OLLYDBG name 'Scan';
-function     Optostring(s:PWChar;op:LongInt): LongInt; stdcall; external OLLYDBG name 'Optostring';
+function     Skipspaces(ps:P_scan): LongInt; cdecl; external OLLYDBG name 'Skipspaces';
+procedure    Scan(ps:P_scan); cdecl; external OLLYDBG name 'Scan';
+function     Optostring(s:PWChar;op:LongInt): LongInt; cdecl; external OLLYDBG name 'Optostring';
 
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// SHORTCUTS, MENUS AND TOOLBAR /////////////////////////
@@ -861,8 +862,8 @@ procedure    _Message(addr:ULong;format:PWChar); cdecl; varargs; external OLLYDB
 procedure    Tempinfo(format:PWChar); cdecl; varargs; external OLLYDBG name 'Tempinfo';
 procedure    Flash(format:PWChar); cdecl; varargs; external OLLYDBG name 'Flash';
 procedure    Progress(promille:LongInt;format:PWChar); cdecl; varargs; external OLLYDBG name 'Progress'; 
-procedure    Moveprogress(promille:LongInt); stdcall; external OLLYDBG name 'Moveprogress';
-procedure    Setstatus(newstatus:t_status); stdcall; external OLLYDBG name 'Setstatus';
+procedure    Moveprogress(promille:LongInt); cdecl; external OLLYDBG name 'Moveprogress';
+procedure    Setstatus(newstatus:t_status); cdecl; external OLLYDBG name 'Setstatus';
 
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////// DATA FUNCTIONS ////////////////////////////////
@@ -990,27 +991,27 @@ P_mnemo = ^t_mnemo;                            // Mnemonics decoding DT_MNEMO
   flags:UChar;                                 // Set of MF_xxx
 	end;
 
-function     Insertdata(addr:ULong;dtype:LongInt;data:pointer;datasize:ULong): LongInt; stdcall; external OLLYDBG name 'Insertdata';
-function     Finddata(addr:ULong;dtype:LongInt;data:pointer;datasize:ULong): ULong; stdcall; external OLLYDBG name 'Finddata';
-function     Finddataptr(addr:ULong;dtype:LongInt;datasize:PULong): Pointer; stdcall; external OLLYDBG name 'Finddataptr';
-procedure    Startnextdata(addr0:ULong;addr1:ULong;dtype:LongInt); stdcall; external OLLYDBG name 'Startnextdata';
-function     Findnextdata(addr:PULong;data:pointer;datasize:ULong): ULong; stdcall; external OLLYDBG name 'Findnextdata';
-procedure    Startnextdatalist(addr0:ULong;addr1:ULong;list:LongInt;n:LongInt); stdcall; external OLLYDBG name 'Startnextdatalist';
-function     Findnextdatalist(addr:ULong;dtype:LongInt;data:pointer;datasize:ULong): LongInt; stdcall; external OLLYDBG name 'Findnextdatalist';
-function     Isdataavailable(addr:ULong;dtype1:LongInt;dtype2:LongInt;dtype3:LongInt): LongInt; stdcall; external OLLYDBG name 'Isdataavailable';
-function     Isdatainrange(addr0:ULong;addr1:ULong;dtype1:LongInt;dtype2:LongInt;dtype3:LongInt): LongInt; stdcall; external OLLYDBG name 'Isdatainrange';
-procedure    Deletedatarange(addr0:ULong;addr1:ULong;dtype1:LongInt;dtype2:LongInt;dtype3:LongInt); stdcall; external OLLYDBG name 'Deletedatarange';
-procedure    Deletedatarangelist(addr0:ULong;addr1:ULong;list:LongInt;n:LongInt); stdcall; external OLLYDBG name 'Deletedatarangelist';
-function     Quickinsertdata(addr:ULong;dtype:LongInt;data:Pointer;datasize:ULong): LongInt; stdcall; external OLLYDBG name 'Quickinsertdata';
-procedure    Mergequickdata; stdcall; external OLLYDBG name 'Mergequickdata';
-function     DemanglenameW(name:PWChar;undecorated:PWChar;recurs:LongInt): LongInt; stdcall; external OLLYDBG name 'DemanglenameW';
-function     InsertnameW(addr: ULong; dtype: LongInt; s: PWChar): LongInt; stdcall; external OLLYDBG name 'InsertnameW';
-function     QuickinsertnameW(addr:ULong;dtype:LongInt;s:PWChar): LongInt; stdcall; external OLLYDBG name 'QuickinsertnameW';
-function     FindnameW(addr:ULong;dtype:LongInt;name:PWChar;nname:LongInt): LongInt; stdcall; external OLLYDBG name 'FindnameW';
-function     FindnextnameW(addr:ULong;name:PWChar;nname:LongInt): LongInt; stdcall; external OLLYDBG name 'FindnextnameW';
-procedure    Startnextnamelist(addr0:ULong;addr1:ULong;list:LongInt;n:LongInt); stdcall; external OLLYDBG name 'Startnextnamelist';
-function     FindnextnamelistW(addr:ULong;dtype:LongInt;name:PWChar;nname:LongInt): LongInt; stdcall; external OLLYDBG name 'FindnextnamelistW';
-function     Findlabel(addr:ULong;name:PWChar;firsttype:LongInt): LongInt; stdcall; external OLLYDBG name 'Findlabel';
+function     Insertdata(addr:ULong;dtype:LongInt;data:pointer;datasize:ULong): LongInt; cdecl; external OLLYDBG name 'Insertdata';
+function     Finddata(addr:ULong;dtype:LongInt;data:pointer;datasize:ULong): ULong; cdecl; external OLLYDBG name 'Finddata';
+function     Finddataptr(addr:ULong;dtype:LongInt;datasize:PULong): Pointer; cdecl; external OLLYDBG name 'Finddataptr';
+procedure    Startnextdata(addr0:ULong;addr1:ULong;dtype:LongInt); cdecl; external OLLYDBG name 'Startnextdata';
+function     Findnextdata(addr:PULong;data:pointer;datasize:ULong): ULong; cdecl; external OLLYDBG name 'Findnextdata';
+procedure    Startnextdatalist(addr0:ULong;addr1:ULong;list:LongInt;n:LongInt); cdecl; external OLLYDBG name 'Startnextdatalist';
+function     Findnextdatalist(addr:ULong;dtype:LongInt;data:pointer;datasize:ULong): LongInt; cdecl; external OLLYDBG name 'Findnextdatalist';
+function     Isdataavailable(addr:ULong;dtype1:LongInt;dtype2:LongInt;dtype3:LongInt): LongInt; cdecl; external OLLYDBG name 'Isdataavailable';
+function     Isdatainrange(addr0:ULong;addr1:ULong;dtype1:LongInt;dtype2:LongInt;dtype3:LongInt): LongInt; cdecl; external OLLYDBG name 'Isdatainrange';
+procedure    Deletedatarange(addr0:ULong;addr1:ULong;dtype1:LongInt;dtype2:LongInt;dtype3:LongInt); cdecl; external OLLYDBG name 'Deletedatarange';
+procedure    Deletedatarangelist(addr0:ULong;addr1:ULong;list:LongInt;n:LongInt); cdecl; external OLLYDBG name 'Deletedatarangelist';
+function     Quickinsertdata(addr:ULong;dtype:LongInt;data:Pointer;datasize:ULong): LongInt; cdecl; external OLLYDBG name 'Quickinsertdata';
+procedure    Mergequickdata; cdecl; external OLLYDBG name 'Mergequickdata';
+function     DemanglenameW(name:PWChar;undecorated:PWChar;recurs:LongInt): LongInt; cdecl; external OLLYDBG name 'DemanglenameW';
+function     InsertnameW(addr: ULong; dtype: LongInt; s: PWChar): LongInt; cdecl; external OLLYDBG name 'InsertnameW';
+function     QuickinsertnameW(addr:ULong;dtype:LongInt;s:PWChar): LongInt; cdecl; external OLLYDBG name 'QuickinsertnameW';
+function     FindnameW(addr:ULong;dtype:LongInt;name:PWChar;nname:LongInt): LongInt; cdecl; external OLLYDBG name 'FindnameW';
+function     FindnextnameW(addr:ULong;name:PWChar;nname:LongInt): LongInt; cdecl; external OLLYDBG name 'FindnextnameW';
+procedure    Startnextnamelist(addr0:ULong;addr1:ULong;list:LongInt;n:LongInt); cdecl; external OLLYDBG name 'Startnextnamelist';
+function     FindnextnamelistW(addr:ULong;dtype:LongInt;name:PWChar;nname:LongInt): LongInt; cdecl; external OLLYDBG name 'FindnextnamelistW';
+function     Findlabel(addr:ULong;name:PWChar;firsttype:LongInt): LongInt; cdecl; external OLLYDBG name 'Findlabel';
 
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////// SIMPLE DATA FUNCTIONS ////////////////////////////
@@ -1026,14 +1027,14 @@ P_simple = ^t_simple;          // Simple data container
   sorted:LongInt;              // Whether data is sorted
 	end;
 
-procedure    Destroysimpledata(pdat:P_simple); stdcall; external OLLYDBG name 'Destroysimpledata';
-function     Createsimpledata(pdat:P_simple;itemsize:ULong): LongInt; stdcall; external OLLYDBG name 'Createsimpledata';
-function     Addsimpledata(pdat:P_simple;data:Pointer): LongInt; stdcall; external OLLYDBG name 'Addsimpledata';
-procedure    Sortsimpledata(pdat:P_simple); stdcall; external OLLYDBG name 'Sortsimpledata';
-function     Findsimpledata(pdat:P_simple;addr:ULong): Pointer; stdcall; external OLLYDBG name 'Findsimpledata';
-function     Getsimpledataindexbyaddr(pdat:P_simple;addr:ULong): LongInt; stdcall; external OLLYDBG name 'Getsimpledataindexbyaddr';
-function     Getsimpledatabyindex(pdat:P_simple;index:LongInt): Pointer; stdcall; external OLLYDBG name 'Getsimpledatabyindex';
-procedure    Deletesimpledatarange(pdat:P_simple;addr0:ULong;addr1:ULong); stdcall; external OLLYDBG name 'Deletesimpledatarange';
+procedure    Destroysimpledata(pdat:P_simple); cdecl; external OLLYDBG name 'Destroysimpledata';
+function     Createsimpledata(pdat:P_simple;itemsize:ULong): LongInt; cdecl; external OLLYDBG name 'Createsimpledata';
+function     Addsimpledata(pdat:P_simple;data:Pointer): LongInt; cdecl; external OLLYDBG name 'Addsimpledata';
+procedure    Sortsimpledata(pdat:P_simple); cdecl; external OLLYDBG name 'Sortsimpledata';
+function     Findsimpledata(pdat:P_simple;addr:ULong): Pointer; cdecl; external OLLYDBG name 'Findsimpledata';
+function     Getsimpledataindexbyaddr(pdat:P_simple;addr:ULong): LongInt; cdecl; external OLLYDBG name 'Getsimpledataindexbyaddr';
+function     Getsimpledatabyindex(pdat:P_simple;index:LongInt): Pointer; cdecl; external OLLYDBG name 'Getsimpledatabyindex';
+procedure    Deletesimpledatarange(pdat:P_simple;addr0:ULong;addr1:ULong); cdecl; external OLLYDBG name 'Deletesimpledatarange';
 
 const
 // Bits that describe the state of predicted data, similar to PST_xxx.
@@ -1231,23 +1232,23 @@ P_sorted = ^t_sorted;          // Descriptor of sorted data
   sortindex:PInteger;          // Indexes, sorted by criterium
 	end;
 
-procedure    Destroysorteddata(sd:P_sorted); stdcall; external OLLYDBG name 'Destroysorteddata';
-function     Createsorteddata(sd:P_sorted;itemsize:ULong;nexp:LongInt;sortfunc:SORTFUNC;destfunc:DESTFUNC;mode:LongInt): LongInt; stdcall; external OLLYDBG name 'Createsorteddata';                             
-procedure    Deletesorteddata(sd:P_sorted;addr:ULong;subaddr:ULong); stdcall; external OLLYDBG name 'Deletesorteddata';
-function     Deletesorteddatarange(sd:P_sorted;addr0:ULong;addr1:ULong): LongInt; stdcall; external OLLYDBG name 'Deletesorteddatarange';
-function     Addsorteddata(sd:P_sorted;item:Pointer):Pointer; stdcall; external OLLYDBG name 'Addsorteddata';
-function     Replacesorteddatarange(sd:P_sorted;data:Pointer;n:LongInt;addr0:ULong;addr1:ULong): LongInt; stdcall; external OLLYDBG name 'Replacesorteddatarange';
-procedure    Renumeratesorteddata(sd:P_sorted); stdcall; external OLLYDBG name 'Renumeratesorteddata';
-function     Confirmsorteddata(sd:P_sorted;confirm:LongInt): LongInt; stdcall; external OLLYDBG name 'Confirmsorteddata';
-function     Deletenonconfirmedsorteddata(sd:P_sorted): LongInt; stdcall; external OLLYDBG name 'Deletenonconfirmedsorteddata';
-procedure    Unmarknewsorteddata(sd:P_sorted); stdcall; external OLLYDBG name 'Unmarknewsorteddata';
-function     Findsorteddata(sd:P_sorted;addr:ULong;subaddr:ULong): Pointer; stdcall; external OLLYDBG name ' Findsorteddata';
-function     Findsorteddatarange(sd:P_sorted;addr0:ULong;addr1:ULong):Pointer stdcall; external OLLYDBG name 'Findsorteddatarange';
-function     Findsortedindexrange(sd:P_sorted;addr0:ULong;addr1:ULong): LongInt; stdcall; external OLLYDBG name 'Findsortedindexrange';
-function     Getsortedbyindex(sd:P_sorted;index:LongInt): Pointer; stdcall; external OLLYDBG name 'Getsortedbyindex';
-function     Sortsorteddata(sd:P_sorted;sort:LongInt): LongInt; stdcall; external OLLYDBG name 'Sortsorteddata';
-function     Getsortedbyselection(sd:P_sorted;index:LongInt): Pointer; stdcall; external OLLYDBG name 'Getsortedbyselection';
-function     Issortedinit(sd:P_sorted): LongInt; stdcall; external OLLYDBG name 'Issortedinit';
+procedure    Destroysorteddata(sd:P_sorted); cdecl; external OLLYDBG name 'Destroysorteddata';
+function     Createsorteddata(sd:P_sorted;itemsize:ULong;nexp:LongInt;sortfunc:SORTFUNC;destfunc:DESTFUNC;mode:LongInt): LongInt; cdecl; external OLLYDBG name 'Createsorteddata';                             
+procedure    Deletesorteddata(sd:P_sorted;addr:ULong;subaddr:ULong); cdecl; external OLLYDBG name 'Deletesorteddata';
+function     Deletesorteddatarange(sd:P_sorted;addr0:ULong;addr1:ULong): LongInt; cdecl; external OLLYDBG name 'Deletesorteddatarange';
+function     Addsorteddata(sd:P_sorted;item:Pointer):Pointer; cdecl; external OLLYDBG name 'Addsorteddata';
+function     Replacesorteddatarange(sd:P_sorted;data:Pointer;n:LongInt;addr0:ULong;addr1:ULong): LongInt; cdecl; external OLLYDBG name 'Replacesorteddatarange';
+procedure    Renumeratesorteddata(sd:P_sorted); cdecl; external OLLYDBG name 'Renumeratesorteddata';
+function     Confirmsorteddata(sd:P_sorted;confirm:LongInt): LongInt; cdecl; external OLLYDBG name 'Confirmsorteddata';
+function     Deletenonconfirmedsorteddata(sd:P_sorted): LongInt; cdecl; external OLLYDBG name 'Deletenonconfirmedsorteddata';
+procedure    Unmarknewsorteddata(sd:P_sorted); cdecl; external OLLYDBG name 'Unmarknewsorteddata';
+function     Findsorteddata(sd:P_sorted;addr:ULong;subaddr:ULong): Pointer; cdecl; external OLLYDBG name ' Findsorteddata';
+function     Findsorteddatarange(sd:P_sorted;addr0:ULong;addr1:ULong):Pointer cdecl; external OLLYDBG name 'Findsorteddatarange';
+function     Findsortedindexrange(sd:P_sorted;addr0:ULong;addr1:ULong): LongInt; cdecl; external OLLYDBG name 'Findsortedindexrange';
+function     Getsortedbyindex(sd:P_sorted;index:LongInt): Pointer; cdecl; external OLLYDBG name 'Getsortedbyindex';
+function     Sortsorteddata(sd:P_sorted;sort:LongInt): LongInt; cdecl; external OLLYDBG name 'Sortsorteddata';
+function     Getsortedbyselection(sd:P_sorted;index:LongInt): Pointer; cdecl; external OLLYDBG name 'Getsortedbyselection';
+function     Issortedinit(sd:P_sorted): LongInt; cdecl; external OLLYDBG name 'Issortedinit';
 
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// SORTED DATA WINDOWS (TABLES) /////////////////////////
@@ -1407,8 +1408,8 @@ P_menu  = ^t_menu;                 // Menu descriptor
 
 t_menu_union = record
   case BYTE of
-	0: (index: ULong);             // Argument passed to menu function
-	1: (hsubmenu: HMENU);          // Handle of pulldown menu
+	0: (index: ULong);               // Argument passed to menu function
+	1: (hsubmenu: HMENU);            // Handle of pulldown menu
   end;
 
 MENUFUNC = function(table:P_table;text:PWChar;index:ULong;mode:LongInt): LongInt; cdecl;
@@ -1462,7 +1463,7 @@ MENUFUNC = function(table:P_table;text:PWChar;index:ULong;mode:LongInt): LongInt
   rtback:LongInt;                       // Back step in run trace, 0 - actual
 	end;
 
-function Callmenufunction(table:P_table;pm:P_menu;menufunc:MENUFUNC;index:ULong): LongInt; stdcall; external OLLYDBG name 'Callmenufunction';
+function Callmenufunction(table:P_table;pm:P_menu;menufunc:MENUFUNC;index:ULong): LongInt; cdecl; external OLLYDBG name 'Callmenufunction';
 ////////////////////////////////////////////////////////////////////////////////
 Const
 
@@ -1510,29 +1511,29 @@ ALIGN_RIGHT    =$4000;           // Control moves with right border
 ALIGN_WIDTH    =$8000;           // Control resizes with right border
 ALIGN_IDMASK   =$0FFF;           // Mask to extract control ID
 
-procedure    Processwmmousewheel(hw:HWND;wp:WPARAM); stdcall; external OLLYDBG name 'Processwmmousewheel';
-function     Getcharacterwidth(pt:P_table;column:LongInt): LongInt; stdcall; external OLLYDBG name 'Getcharacterwidth';
-procedure    Defaultbar(pt:P_table); stdcall; external OLLYDBG name 'Defaultbar';
-function     Linecount(pt:P_table): LongInt; stdcall; external OLLYDBG name 'Linecount';
+procedure    Processwmmousewheel(hw:HWND;wp:WPARAM); cdecl; external OLLYDBG name 'Processwmmousewheel';
+function     Getcharacterwidth(pt:P_table;column:LongInt): LongInt; cdecl; external OLLYDBG name 'Getcharacterwidth';
+procedure    Defaultbar(pt:P_table); cdecl; external OLLYDBG name 'Defaultbar';
+function     Linecount(pt:P_table): LongInt; cdecl; external OLLYDBG name 'Linecount';
 function     Gettabletext(pt:P_table;row:LongInt;column:LongInt;
-                          text:PWChar;tmask:PUChar;tselect:PInteger): LongInt; stdcall; external OLLYDBG name 'Gettabletext';
-function     Gettableselectionxy(pt:P_table;column:LongInt;coord:PPOINT): LongInt; stdcall; external OLLYDBG name 'Gettableselectionxy';
-function     Maketableareavisible(pt:P_table;column:LongInt;x0:LongInt;y0:LongInt;x1:LongInt;y1:LongInt): LongInt; stdcall; external OLLYDBG name 'Maketableareavisible';
-function     Movetableselection(pt:P_table;n:LongInt): LongInt; stdcall; external OLLYDBG name 'Movetableselection';
-function     Settableselection(pt:P_table;selected:LongInt): LongInt; stdcall; external OLLYDBG name 'Settableselection';
-function     Removetableselection(pt:P_table): LongInt; stdcall; external OLLYDBG name 'Removetableselection';
-procedure    Updatetable(pt:P_table;force:LongInt); stdcall; external OLLYDBG name 'Updatetable';
-procedure    Delayedtableredraw(pt:P_table); stdcall; external OLLYDBG name 'Delayedtableredraw';
-procedure    Setautoupdate(pt:P_table;autoupdate:LongInt); stdcall; external OLLYDBG name 'Setautoupdate';
-function     Copytableselection(pt:P_table;column:LongInt): HGLOBAL; stdcall; external OLLYDBG name 'Copytableselection';
-function     Copywholetable(pt:P_table;compatible:LongInt): HGLOBAL; stdcall; external OLLYDBG name 'Copywholetable';
-function     Createottablewindow(hparent:HWND;pt:P_table;rpos:PRECT): HWND; stdcall; external OLLYDBG name 'Createottablewindow';
+                          text:PWChar;tmask:PUChar;tselect:PInteger): LongInt; cdecl; external OLLYDBG name 'Gettabletext';
+function     Gettableselectionxy(pt:P_table;column:LongInt;coord:PPOINT): LongInt; cdecl; external OLLYDBG name 'Gettableselectionxy';
+function     Maketableareavisible(pt:P_table;column:LongInt;x0:LongInt;y0:LongInt;x1:LongInt;y1:LongInt): LongInt; cdecl; external OLLYDBG name 'Maketableareavisible';
+function     Movetableselection(pt:P_table;n:LongInt): LongInt; cdecl; external OLLYDBG name 'Movetableselection';
+function     Settableselection(pt:P_table;selected:LongInt): LongInt; cdecl; external OLLYDBG name 'Settableselection';
+function     Removetableselection(pt:P_table): LongInt; cdecl; external OLLYDBG name 'Removetableselection';
+procedure    Updatetable(pt:P_table;force:LongInt); cdecl; external OLLYDBG name 'Updatetable';
+procedure    Delayedtableredraw(pt:P_table); cdecl; external OLLYDBG name 'Delayedtableredraw';
+procedure    Setautoupdate(pt:P_table;autoupdate:LongInt); cdecl; external OLLYDBG name 'Setautoupdate';
+function     Copytableselection(pt:P_table;column:LongInt): HGLOBAL; cdecl; external OLLYDBG name 'Copytableselection';
+function     Copywholetable(pt:P_table;compatible:LongInt): HGLOBAL; cdecl; external OLLYDBG name 'Copywholetable';
+function     Createottablewindow(hparent:HWND;pt:P_table;rpos:PRECT): HWND; cdecl; external OLLYDBG name 'Createottablewindow';
 function     Createtablewindow(pt:P_table;nrow:LongInt;ncolumn:LongInt;
-                               hi:Pointer;icon:PWChar;title:PWChar): HWND; stdcall; external OLLYDBG name 'Createtablewindow';
-function     Activatetablewindow(pt:P_table): HWND; stdcall; external OLLYDBG name 'Activatetablewindow';
+                               hi:Pointer;icon:PWChar;title:PWChar): HWND; cdecl; external OLLYDBG name 'Createtablewindow';
+function     Activatetablewindow(pt:P_table): HWND; cdecl; external OLLYDBG name 'Activatetablewindow';
 function     Createtablechild(pt:P_table;classname:PWChar;name:PWChar;
                               help:PWChar;style:ULong;x:LongInt;y:LongInt;dx:LongInt;
-                              dy:LongInt;idalign:LongInt): HWND; stdcall; external OLLYDBG name 'Createtablechild';
+                              dy:LongInt;idalign:LongInt): HWND; cdecl; external OLLYDBG name 'Createtablechild';
 
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////// FRAME AND TAB WINDOWS /////////////////////////////
@@ -1586,14 +1587,14 @@ P_frame = ^t_frame;                            // Descriptor of frame or tab win
   title:array[0..TEXTLEN-1] of WChar;          // Frame or tab window title
 	end;
 
-function     Createframewindow(pf:P_frame;icon:PWChar;title:PWChar):HWND; stdcall; external OLLYDBG name 'Createframewindow';
-procedure    Updateframe(pf:P_frame;redrawnow:LongInt); stdcall; external OLLYDBG name 'Updateframe';
-function     Getactiveframe(pf:P_frame): P_table; stdcall; external OLLYDBG name 'Getactiveframe';
-function     Updatetabs(pf:P_frame): LongInt; stdcall; external OLLYDBG name 'Updatetabs';
-function     Createtabwindow(pf:P_frame;icon:PWChar;title:PWChar):HWND; stdcall; external OLLYDBG name 'Createtabwindow';
-function     Getactivetab(pf:P_frame): P_table; stdcall; external OLLYDBG name 'Getactivetab';
-function     Gettabcount(pf:P_frame;index:PInteger): LongInt; stdcall; external OLLYDBG name 'Gettabcount';
-function     Setactivetab(pf:P_frame;index:LongInt): LongInt; stdcall; external OLLYDBG name 'Setactivetab';
+function     Createframewindow(pf:P_frame;icon:PWChar;title:PWChar):HWND; cdecl; external OLLYDBG name 'Createframewindow';
+procedure    Updateframe(pf:P_frame;redrawnow:LongInt); cdecl; external OLLYDBG name 'Updateframe';
+function     Getactiveframe(pf:P_frame): P_table; cdecl; external OLLYDBG name 'Getactiveframe';
+function     Updatetabs(pf:P_frame): LongInt; cdecl; external OLLYDBG name 'Updatetabs';
+function     Createtabwindow(pf:P_frame;icon:PWChar;title:PWChar):HWND; cdecl; external OLLYDBG name 'Createtabwindow';
+function     Getactivetab(pf:P_frame): P_table; cdecl; external OLLYDBG name 'Getactivetab';
+function     Gettabcount(pf:P_frame;index:PInteger): LongInt; cdecl; external OLLYDBG name 'Gettabcount';
+function     Setactivetab(pf:P_frame;index:LongInt): LongInt; cdecl; external OLLYDBG name 'Setactivetab';
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////// FONTS AND GRAPHICS //////////////////////////////
@@ -1741,9 +1742,9 @@ P_scheme = ^t_scheme;                      // Descriptor of colour scheme
   ulpen:HPEN;                              // Pen to underline text
 	end;
 
-function     Getmonitorrect(x:LongInt;y:LongInt;rc:PRECT): LongInt; stdcall; external OLLYDBG name 'Getmonitorrect';
-procedure    Sunkenframe(dc:HDC;rc:PRECT;flags:LongInt); stdcall; external OLLYDBG name 'Sunkenframe';
-function     Findstockobject(gdihandle:ULong;name:PWChar;nname:LongInt): LongInt; stdcall; external OLLYDBG name 'Findstockobject';
+function     Getmonitorrect(x:LongInt;y:LongInt;rc:PRECT): LongInt; cdecl; external OLLYDBG name 'Getmonitorrect';
+procedure    Sunkenframe(dc:HDC;rc:PRECT;flags:LongInt); cdecl; external OLLYDBG name 'Sunkenframe';
+function     Findstockobject(gdihandle:ULong;name:PWChar;nname:LongInt): LongInt; cdecl; external OLLYDBG name 'Findstockobject';
 
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////// MEMORY FUNCTIONS ///////////////////////////////
@@ -1787,18 +1788,18 @@ P_memory = ^t_memory;                           // Descriptor of memory block
   decode:PUChar;                                // Decoding information or NULL
 	end;
 
-procedure   Flushmemorycache; stdcall; external OLLYDBG name 'Flushmemorycache';
-function    Readmemory(buf:Pointer;addr:ULong;size:ULong;mode:LongInt): ULong; stdcall; external OLLYDBG name 'Readmemory';
-function    Readmemoryex(buf:Pointer;addr:ULong;size:ULong;mode:LongInt;threadid:ULong): ULong; stdcall; external OLLYDBG name 'Readmemoryex';
-function    Writememory(const buf:Pointer;addr:ULong;size:ULong;mode:LongInt): ULong; stdcall; external OLLYDBG name 'Writememory';
-function    Findmemory(addr:ULong): P_memory; stdcall; external OLLYDBG name 'Findmemory';
-function    Finddecode(addr:ULong;psize:PULong): PWChar; stdcall; external OLLYDBG name 'Finddecode';
-function    Guardmemory(base:ULong;size:ULong;guard:LongInt): LongInt;stdcall; external OLLYDBG name 'Guardmemory';
-function    Listmemory: LongInt; stdcall; external OLLYDBG name 'Listmemory';
-function    Copymemoryhex(addr:ULong;size:ULong): HGLOBAL; stdcall; external OLLYDBG name 'Copymemoryhex';
-function    Pastememoryhex(addr:ULong;size:ULong;ensurebackup:LongInt;removeanalysis:LongInt): LongInt; stdcall; external OLLYDBG name 'Pastememoryhex';
+procedure   Flushmemorycache; cdecl; external OLLYDBG name 'Flushmemorycache';
+function    Readmemory(buf:Pointer;addr:ULong;size:ULong;mode:LongInt): ULong; cdecl; external OLLYDBG name 'Readmemory';
+function    Readmemoryex(buf:Pointer;addr:ULong;size:ULong;mode:LongInt;threadid:ULong): ULong; cdecl; external OLLYDBG name 'Readmemoryex';
+function    Writememory(const buf:Pointer;addr:ULong;size:ULong;mode:LongInt): ULong; cdecl; external OLLYDBG name 'Writememory';
+function    Findmemory(addr:ULong): P_memory; cdecl; external OLLYDBG name 'Findmemory';
+function    Finddecode(addr:ULong;psize:PULong): PWChar; cdecl; external OLLYDBG name 'Finddecode';
+function    Guardmemory(base:ULong;size:ULong;guard:LongInt): LongInt;cdecl; external OLLYDBG name 'Guardmemory';
+function    Listmemory: LongInt; cdecl; external OLLYDBG name 'Listmemory';
+function    Copymemoryhex(addr:ULong;size:ULong): HGLOBAL; cdecl; external OLLYDBG name 'Copymemoryhex';
+function    Pastememoryhex(addr:ULong;size:ULong;ensurebackup:LongInt;removeanalysis:LongInt): LongInt; cdecl; external OLLYDBG name 'Pastememoryhex';
 function    Editmemory(hparent:HWND;addr:ULong;size:ULong;ensurebackup:LongInt;removeanalysis:LongInt;
-                       x:LongInt;y:LongInt;font:LongInt): LongInt; stdcall; external OLLYDBG name 'Editmemory';
+                       x:LongInt;y:LongInt;font:LongInt): LongInt; cdecl; external OLLYDBG name 'Editmemory';
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -1852,7 +1853,7 @@ P_jmpdata = ^t_jmpdata;         // Jump table
   modbase:ULong;                // Base of module owning jump table
   modsize:ULong;                // Size of module owning jump table
   jmpdata:P_jmp;                // Jump data, sorted by source
-  jmpindex:PLongInt;         // Indices to jmpdata, sorted by dest
+  jmpindex:PLongInt;            // Indices to jmpdata, sorted by dest
   maxjmp:LongInt;               // Total number of elements in arrays
   njmp:LongInt;                 // Number of used elements in arrays
   nsorted:LongInt;              // Number of sorted elements in arrays
@@ -1874,14 +1875,14 @@ P_jmpcall = ^t_jmpcall;         // Descriptor of found jump or call
   jmpType:t_jmpcall_union;
 	end;
 
-function     Addjump(pdat:P_jmpdata;from:ULong;dest:ULong;jtype:LongInt): LongInt; stdcall; external OLLYDBG name 'Addjump';
-procedure    Sortjumpdata(pdat:P_jmpdata); stdcall; external OLLYDBG name 'Sortjumpdata';
-function     Findjumpfrom(from:ULong ): P_jmp; stdcall; external OLLYDBG name 'Findjumpfrom';
-function     Findlocaljumpsto(dest:ULong;buf:PULong;nbuf:LongInt): LongInt; stdcall; external OLLYDBG name 'Findlocaljumpsto';
-function     Findlocaljumpscallsto(dest:ULong;jmpcall:P_jmpcall;njmpcall:LongInt) : LongInt; stdcall; external OLLYDBG name 'Findlocaljumpscallsto';
-function     Arelocaljumpscallstorange(addr0:ULong;addr1:ULong): LongInt; stdcall; external OLLYDBG name 'Arelocaljumpscallstorange';
-function     Findglobalcallsto(dest:ULong;buf:PULong;nbuf:LongInt): LongInt; stdcall; external OLLYDBG name 'Findglobalcallsto';
-function     Findglobaljumpscallsto(dest:ULong;jmpcall:P_jmpcall;njmpcall:LongInt): LongInt; stdcall; external OLLYDBG name 'Findglobaljumpscallsto';
+function     Addjump(pdat:P_jmpdata;from:ULong;dest:ULong;jtype:LongInt): LongInt; cdecl; external OLLYDBG name 'Addjump';
+procedure    Sortjumpdata(pdat:P_jmpdata); cdecl; external OLLYDBG name 'Sortjumpdata';
+function     Findjumpfrom(from:ULong ): P_jmp; cdecl; external OLLYDBG name 'Findjumpfrom';
+function     Findlocaljumpsto(dest:ULong;buf:PULong;nbuf:LongInt): LongInt; cdecl; external OLLYDBG name 'Findlocaljumpsto';
+function     Findlocaljumpscallsto(dest:ULong;jmpcall:P_jmpcall;njmpcall:LongInt) : LongInt; cdecl; external OLLYDBG name 'Findlocaljumpscallsto';
+function     Arelocaljumpscallstorange(addr0:ULong;addr1:ULong): LongInt; cdecl; external OLLYDBG name 'Arelocaljumpscallstorange';
+function     Findglobalcallsto(dest:ULong;buf:PULong;nbuf:LongInt): LongInt; cdecl; external OLLYDBG name 'Findglobalcallsto';
+function     Findglobaljumpscallsto(dest:ULong;jmpcall:P_jmpcall;njmpcall:LongInt): LongInt; cdecl; external OLLYDBG name 'Findglobaljumpscallsto';
 
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////// SETS OF RANGES ////////////////////////////////
@@ -1894,16 +1895,16 @@ P_range = ^t_range;
   rmax:ULong;                   // High range limit (INCLUDED!)
 	end;
 
-function     Initset(zset:P_range;nmax:ULong): LongInt; stdcall; external OLLYDBG name 'Initset';
-function     Fullrange(zset:P_range): LongInt; stdcall; external OLLYDBG name 'Fullrange';
-function     Emptyrange(zset:P_range): LongInt; stdcall; external OLLYDBG name 'Emptyrange';
-function     Getsetcount(const zset:P_range): ULong; stdcall; external OLLYDBG name 'Getsetcount';
-function     Getrangecount(const zset:P_range): LongInt; stdcall; external OLLYDBG name 'Getrangecount';
-function     Isinset(const zset:P_range;value:ULong): LongInt; stdcall; external OLLYDBG name 'Isinset';
-function     Getrangebymember(const zset:P_range;value:ULong;rmin:PULong;rmax:PULong): LongInt; stdcall; external OLLYDBG name 'Getrangebymember';
-function     Getrangebyindex(const zset:P_range;index:LongInt;rmin:PULong;rmax:PULong): LongInt; stdcall; external OLLYDBG name 'Getrangebyindex';
-function     Addrange(zset:P_range;rmin:ULong;rmax:ULong): LongInt; stdcall; external OLLYDBG name 'Addrange';
-function     Removerange(zset:P_range;rmin:ULong;rmax:ULong): LongInt; stdcall; external OLLYDBG name 'Removerange';
+function     Initset(zset:P_range;nmax:ULong): LongInt; cdecl; external OLLYDBG name 'Initset';
+function     Fullrange(zset:P_range): LongInt; cdecl; external OLLYDBG name 'Fullrange';
+function     Emptyrange(zset:P_range): LongInt; cdecl; external OLLYDBG name 'Emptyrange';
+function     Getsetcount(const zset:P_range): ULong; cdecl; external OLLYDBG name 'Getsetcount';
+function     Getrangecount(const zset:P_range): LongInt; cdecl; external OLLYDBG name 'Getrangecount';
+function     Isinset(const zset:P_range;value:ULong): LongInt; cdecl; external OLLYDBG name 'Isinset';
+function     Getrangebymember(const zset:P_range;value:ULong;rmin:PULong;rmax:PULong): LongInt; cdecl; external OLLYDBG name 'Getrangebymember';
+function     Getrangebyindex(const zset:P_range;index:LongInt;rmin:PULong;rmax:PULong): LongInt; cdecl; external OLLYDBG name 'Getrangebyindex';
+function     Addrange(zset:P_range;rmin:ULong;rmax:ULong): LongInt; cdecl; external OLLYDBG name 'Addrange';
+function     Removerange(zset:P_range;rmin:ULong;rmax:ULong): LongInt; cdecl; external OLLYDBG name 'Removerange';
 
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// NESTED DATA //////////////////////////////////
@@ -1939,15 +1940,15 @@ P_nested = ^t_nested;          // Descriptor of nested data
   destfunc: NDDEST;            // Destructor function or NULL
 	end;
 
-procedure    Destroynesteddata(nd:P_nested); stdcall; external OLLYDBG name 'Destroynesteddata';
-function     Createnesteddata(nd:P_nested;itemsize:ULong;nexp:LongInt;destfunc:NDDEST{*}): LongInt; stdcall; external OLLYDBG name 'Createnesteddata';
-function     Addnesteddata(nd:P_nested;item:Pointer): Pointer ; stdcall; external OLLYDBG name 'Addnesteddata';
-procedure    Deletenestedrange(nd:P_nested;addr0:ULong; addr1:ULong); stdcall; external OLLYDBG name 'Deletenestedrange';
-function     Getnestingpattern(nd:P_nested;addr:ULong;pat:PWChar;npat:LongInt;mask:UChar;showentry:LongInt;isend:PInteger): LongInt; stdcall; external OLLYDBG name 'Getnestingpattern';        
-function     Getnestingdepth(nd:P_nested;addr:ULong): LongInt; stdcall; external OLLYDBG name 'Getnestingdepth';
-function     Findnesteddata(nd:P_nested;addr:ULong;level:LongInt):Pointer; stdcall; external OLLYDBG name 'Findnesteddata';
-procedure    Nesteddatatoudd(nd:P_nested;base:ULong;datasize:PULong); stdcall; external OLLYDBG name 'Nesteddatatoudd';
-function     Uddtonesteddata(nd:P_nested;data:Pointer;base:ULong;size:ULong): LongInt; stdcall; external OLLYDBG name 'Uddtonesteddata';
+procedure    Destroynesteddata(nd:P_nested); cdecl; external OLLYDBG name 'Destroynesteddata';
+function     Createnesteddata(nd:P_nested;itemsize:ULong;nexp:LongInt;destfunc:NDDEST{*}): LongInt; cdecl; external OLLYDBG name 'Createnesteddata';
+function     Addnesteddata(nd:P_nested;item:Pointer): Pointer ; cdecl; external OLLYDBG name 'Addnesteddata';
+procedure    Deletenestedrange(nd:P_nested;addr0:ULong; addr1:ULong); cdecl; external OLLYDBG name 'Deletenestedrange';
+function     Getnestingpattern(nd:P_nested;addr:ULong;pat:PWChar;npat:LongInt;mask:UChar;showentry:LongInt;isend:PInteger): LongInt; cdecl; external OLLYDBG name 'Getnestingpattern';        
+function     Getnestingdepth(nd:P_nested;addr:ULong): LongInt; cdecl; external OLLYDBG name 'Getnestingdepth';
+function     Findnesteddata(nd:P_nested;addr:ULong;level:LongInt):Pointer; cdecl; external OLLYDBG name 'Findnesteddata';
+procedure    Nesteddatatoudd(nd:P_nested;base:ULong;datasize:PULong); cdecl; external OLLYDBG name 'Nesteddatatoudd';
+function     Uddtonesteddata(nd:P_nested;data:Pointer;base:ULong;size:ULong): LongInt; cdecl; external OLLYDBG name 'Uddtonesteddata';
 
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// MODULES ////////////////////////////////////
@@ -2017,46 +2018,46 @@ MDTCOUNT       =64;             // Number of .NET MetaData tables
 
 Type
 
-P_secthdr = ^t_secthdr;                 // Extract from IMAGE_SECTION_HEADER
+P_secthdr = ^t_secthdr;                       // Extract from IMAGE_SECTION_HEADER
   t_secthdr = packed record
-  sectname:array[0..12] of WChar;       // Null-terminated section name
-  base:ULong;                           // Address of section in memory
-  size:ULong;                           // Size of section loaded into memory
-  stype:ULong;                          // Set of SHT_xxx
-  fileoffset:ULong;                     // Offset of section in file
-  rawsize:ULong;                        // Size of section in file
-  characteristics:ULong;                // Set of IMAGE_SCN_xxx
+  sectname:array[0..12] of WChar;             // Null-terminated section name
+  base:ULong;                                 // Address of section in memory
+  size:ULong;                                 // Size of section loaded into memory
+  stype:ULong;                                // Set of SHT_xxx
+  fileoffset:ULong;                           // Offset of section in file
+  rawsize:ULong;                              // Size of section in file
+  characteristics:ULong;                      // Set of IMAGE_SCN_xxx
 	end;
 
-P_premod = ^t_premod;                   // Preliminary module descriptor
+P_premod = ^t_premod;                         // Preliminary module descriptor
   t_premod = packed record
-  base:ULong;                           // Base address of the module
-  size:ULong;                           // Size of module or 1
-  stype:ULong;                          // Service information, TY_xxx+MOD_xxx
-  entry:ULong;                          // Address of <ModuleEntryPoint> or 0
-  path:array[0..MAXPATH-1] of WChar;    // Full name of the module
+  base:ULong;                                 // Base address of the module
+  size:ULong;                                 // Size of module or 1
+  stype:ULong;                                // Service information, TY_xxx+MOD_xxx
+  entry:ULong;                                // Address of <ModuleEntryPoint> or 0
+  path:array[0..MAXPATH-1] of WChar;          // Full name of the module
 	end;
 
-P_netstream = ^t_netstream;             // Location of default .NET stream
+P_netstream = ^t_netstream;                   // Location of default .NET stream
   t_netstream = packed record
-  base:ULong;                           // Base address in memory
-  size:ULong;                           // Stream size, bytes
+  base:ULong;                                 // Base address in memory
+  size:ULong;                                 // Stream size, bytes
 	end;
 
-P_metadata = ^t_metadata;               // Descriptor of .NET MetaData table
+P_metadata = ^t_metadata;                     // Descriptor of .NET MetaData table
   t_metadata = packed record
-  base:ULong;                           // Location in memory or NULL if absent
-  rowcount:ULong;                       // Number of rows or 0 if absent
-  rowsize:ULong;                        // Size of single row, bytes, or 0
-  nameoffs:UShort;                      // Offset of name field
-  namesize:UShort;                      // Size of name or 0 if absent
+  base:ULong;                                 // Location in memory or NULL if absent
+  rowcount:ULong;                              // Number of rows or 0 if absent
+  rowsize:ULong;                              // Size of single row, bytes, or 0
+  nameoffs:UShort;                            // Offset of name field
+  namesize:UShort;                            // Size of name or 0 if absent
 	end;
 
 P_module = ^t_module;                         // Descriptor of executable module
   t_module = packed record
   base:ULong;                                 // Base address of module
   size:ULong;                                 // Size of memory occupied by module
-  ztype:ULong;                                // Service information, TY_xxx+MOD_xxx
+  mtype:ULong;                                // Service information, TY_xxx+MOD_xxx
   modname:array[0..SHORTNAME-1] of WChar;     // Short name of the module
   path:array[0..MAXPATH-1] of WChar;          // Full name of the module
   version:array[0..TEXTLEN-1] of WChar;       // Version of executable file
@@ -2110,16 +2111,16 @@ P_aqueue = ^t_aqueue;                         // Descriptor of module to be anal
   Stype:ULong;                                // Service information, TY_xxx+MOD_xxx
 end;
 
-function     Findmodule(addr:ULong): P_module; stdcall; external OLLYDBG name 'Findmodule';
-function     Findmodulebyname(mshortname:PWChar): P_module; stdcall; external OLLYDBG name 'Findmodulebyname';
-function     Findmainmodule: P_module; stdcall; external OLLYDBG name 'Findmainmodule';
-function     Issystem(addr:ULong): LongInt; stdcall; external OLLYDBG name 'Issystem';
-function     Findfixup(pmod:P_module;addr:ULong): PULong; stdcall; external OLLYDBG name 'Findfixup';
-function     Findfileoffset(pmod:P_module;addr:ULong):ULong; stdcall; external OLLYDBG name 'Findfileoffset';
-function     Decoderange(s:PWChar;addr:ULong;size:ULong): LongInt; stdcall; external OLLYDBG name 'Decoderange';
-function     Getexeversion(path:PWChar;version:PWChar): LongInt; stdcall; external OLLYDBG name 'Getexeversion';
-function     Getexportfrommemory(addr:ULong;s:PWChar): LongInt; stdcall; external OLLYDBG name 'Getexportfrommemory';
-function     FindaddressW(name:PWChar;pmod:P_module;addr:PULong;errtxt:PWChar): LongInt; stdcall; external OLLYDBG name 'FindaddressW';
+function     Findmodule(addr:ULong): P_module; cdecl; external OLLYDBG name 'Findmodule';
+function     Findmodulebyname(mshortname:PWChar): P_module; cdecl; external OLLYDBG name 'Findmodulebyname';
+function     Findmainmodule: P_module; cdecl; external OLLYDBG name 'Findmainmodule';
+function     Issystem(addr:ULong): LongInt; cdecl; external OLLYDBG name 'Issystem';
+function     Findfixup(pmod:P_module;addr:ULong): PULong; cdecl; external OLLYDBG name 'Findfixup';
+function     Findfileoffset(pmod:P_module;addr:ULong):ULong; cdecl; external OLLYDBG name 'Findfileoffset';
+function     Decoderange(s:PWChar;addr:ULong;size:ULong): LongInt; cdecl; external OLLYDBG name 'Decoderange';
+function     Getexeversion(path:PWChar;version:PWChar): LongInt; cdecl; external OLLYDBG name 'Getexeversion';
+function     Getexportfrommemory(addr:ULong;s:PWChar): LongInt; cdecl; external OLLYDBG name 'Getexportfrommemory';
+function     FindaddressW(name:PWChar;pmod:P_module;addr:PULong;errtxt:PWChar): LongInt; cdecl; external OLLYDBG name 'FindaddressW';
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////// LIST OF DEBUGGEE'S WINDOWS //////////////////////////
@@ -2187,7 +2188,7 @@ P_string = ^t_string;                  // Descriptor of resource string
   language:LongInt;                    // Language, one of LANG_xxx
 	end;
 
-function     Getmodulestring(pm:P_module;id:ULong;s:PWChar): LongInt; stdcall; external OLLYDBG name 'Getmodulestring';
+function     Getmodulestring(pm:P_module;id:ULong;s:PWChar): LongInt; cdecl; external OLLYDBG name 'Getmodulestring';
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////// UDD FILES ///////////////////////////////////
@@ -2321,11 +2322,11 @@ P_thread = ^t_thread;                      // Information about active threads
   stackbottom:ULong;                       // Bottom of thread's stack
 	end;
 
-function     Findthread(threadid:ULong): P_thread; stdcall; external OLLYDBG name 'Findthread';
-function     Findthreadbyordinal(ordinal:LongInt): P_thread; stdcall; external OLLYDBG name 'Findthreadbyordinal';
-function     Threadregisters(threadid:ULong): P_reg; stdcall; external OLLYDBG name 'Threadregisters';
-function     Decodethreadname(s:PWChar;threadid:ULong;mode:LongInt): LongInt; stdcall; external OLLYDBG name 'Decodethreadname';
-procedure    Registermodifiedbyuser(pthr:P_thread); stdcall; external OLLYDBG name 'Registermodifiedbyuser';
+function     Findthread(threadid:ULong): P_thread; cdecl; external OLLYDBG name 'Findthread';
+function     Findthreadbyordinal(ordinal:LongInt): P_thread; cdecl; external OLLYDBG name 'Findthreadbyordinal';
+function     Threadregisters(threadid:ULong): P_reg; cdecl; external OLLYDBG name 'Threadregisters';
+function     Decodethreadname(s:PWChar;threadid:ULong;mode:LongInt): LongInt; cdecl; external OLLYDBG name 'Decodethreadname';
+procedure    Registermodifiedbyuser(pthr:P_thread); cdecl; external OLLYDBG name 'Registermodifiedbyuser';
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////// ASSEMBLER AND DISASSEMBLER //////////////////////////
@@ -3044,21 +3045,21 @@ DA_FORHELP     =$00000800;               // Decode operands for command help
 USEDECODE      =1;                       // Request to get decoding automatically
 
 
-function     Byteregtodwordreg(bytereg:LongInt): LongInt; stdcall; external OLLYDBG name 'Byteregtodwordreg';
-function     Printfloat4(s:PWChar;f:double): LongInt; stdcall; external OLLYDBG name 'Printfloat4';
-function     Printfloat8(s:PWChar;d:double): LongInt; stdcall; external OLLYDBG name 'Printfloat8';
-function     Printfloat10(s:PWChar;ext:Extended): LongInt; stdcall; external OLLYDBG name 'Printfloat10';
-function     Printmmx(s:PWChar;data:PUChar): LongInt; stdcall; external OLLYDBG name 'Printmmx';
-function     Commentcharacter(s:PWChar;c:LongInt;mode:LongInt): LongInt; stdcall; external OLLYDBG name 'Commentcharacter';
-function     Nameoffloat(s:PWChar;data:PUChar;size:ULong ): LongInt; stdcall; external OLLYDBG name 'Nameoffloat';
+function     Byteregtodwordreg(bytereg:LongInt): LongInt; cdecl; external OLLYDBG name 'Byteregtodwordreg';
+function     Printfloat4(s:PWChar;f:double): LongInt; cdecl; external OLLYDBG name 'Printfloat4';
+function     Printfloat8(s:PWChar;d:double): LongInt; cdecl; external OLLYDBG name 'Printfloat8';
+function     Printfloat10(s:PWChar;ext:Extended): LongInt; cdecl; external OLLYDBG name 'Printfloat10';
+function     Printmmx(s:PWChar;data:PUChar): LongInt; cdecl; external OLLYDBG name 'Printmmx';
+function     Commentcharacter(s:PWChar;c:LongInt;mode:LongInt): LongInt; cdecl; external OLLYDBG name 'Commentcharacter';
+function     Nameoffloat(s:PWChar;data:PUChar;size:ULong ): LongInt; cdecl; external OLLYDBG name 'Nameoffloat';
 function     _Disasm(cmd:PUChar;cmdsize:ULong;ip:ULong;dec:PUChar;da:P_disasm;mode:LongInt;reg:P_reg;
-                    predict:P_predict): ULong; stdcall; external OLLYDBG name 'Disasm';
+                    predict:P_predict): ULong; cdecl; external OLLYDBG name 'Disasm';
 function     Cmdinfo(cmd:PUChar;cmdsize:ULong;cmdip:ULong;
-                    ci:P_cmdinfo;cmdmode:LongInt;cmdreg:P_reg): ULong; stdcall; external OLLYDBG name 'Cmdinfo';
-function     Disassembleforward(copy:PUChar;base:ULong;size:ULong;ip:ULong;n:ULong;decode:PUChar): ULong; stdcall; external OLLYDBG name 'Disassembleforward';
-function     Disassembleback(copy:PUChar;base:ULong;size:ULong;ip:ULong;n:ULong;decode:PUChar): ULong; stdcall; external OLLYDBG name 'Disassembleback';
-function     Checkcondition(code:LongInt;flags:ULong): LongInt; stdcall; external OLLYDBG name 'Checkcondition';
-function     Setcondition(code:LongInt;flags:ULong): ULong; stdcall; external OLLYDBG name 'Setcondition';
+                    ci:P_cmdinfo;cmdmode:LongInt;cmdreg:P_reg): ULong; cdecl; external OLLYDBG name 'Cmdinfo';
+function     Disassembleforward(copy:PUChar;base:ULong;size:ULong;ip:ULong;n:ULong;decode:PUChar): ULong; cdecl; external OLLYDBG name 'Disassembleforward';
+function     Disassembleback(copy:PUChar;base:ULong;size:ULong;ip:ULong;n:ULong;decode:PUChar): ULong; cdecl; external OLLYDBG name 'Disassembleback';
+function     Checkcondition(code:LongInt;flags:ULong): LongInt; cdecl; external OLLYDBG name 'Checkcondition';
+function     Setcondition(code:LongInt;flags:ULong): ULong; cdecl; external OLLYDBG name 'Setcondition';
 
 Const
 AM_ALLOWBAD    =$00000001;     // Allow bad or undocumented commands
@@ -3066,8 +3067,8 @@ AM_IMPRECISE   =$00000002;     // Generate imprecise (search) forms
 AM_MULTI       =$00000004;     // Multiple commands are allowed
 AM_SEARCH      =AM_IMPRECISE;
 
-function  Assembleallforms(src:PWChar;ip:ULong;model:P_asmmod;maxmodel:LongInt;mode:LongInt;errtxt:PWChar): LongInt; stdcall; external OLLYDBG name 'Assembleallforms';
-function  Assemble(src:PWChar;ip:ULong;buf:PUChar;nbuf:ULong;mode:LongInt;errtxt:PWChar): ULong; stdcall; external OLLYDBG name 'Assemble';
+function  Assembleallforms(src:PWChar;ip:ULong;model:P_asmmod;maxmodel:LongInt;mode:LongInt;errtxt:PWChar): LongInt; cdecl; external OLLYDBG name 'Assembleallforms';
+function  Assemble(src:PWChar;ip:ULong;buf:PUChar;nbuf:ULong;mode:LongInt;errtxt:PWChar): ULong; cdecl; external OLLYDBG name 'Assemble';
                   
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////// .NET DISASSEMBLER ///////////////////////////////
@@ -3141,7 +3142,7 @@ P_netasm = ^t_netasm;                    // Disassembled .NET CIL command
 	end;
 
 function   Ndisasm(cmd:PUChar;size:ULong;ip:ULong;da:P_netasm;
-                   mode:LongInt;pmod:P_module): ULong; stdcall; external OLLYDBG name 'Ndisasm';
+                   mode:LongInt;pmod:P_module): ULong; cdecl; external OLLYDBG name 'Ndisasm';
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// ANALYSIS ///////////////////////////////////
 Const
@@ -3210,9 +3211,9 @@ P_loopnest = ^t_loopnest;                // Header of loop bracket
   loopvar:array[0..NLOOPVAR-1] of t_loopvar;
 	end;
 
-function     Getpackednetint(code:PUChar;size:ULong;value:PULong): ULong; stdcall; external OLLYDBG name 'Getpackednetint';
-procedure    Removeanalysis(base:ULong;size:ULong;keephittrace: LongInt); stdcall; external OLLYDBG name 'Removeanalysis';
-function     Maybecommand(addr:ULong;requireanalysis:LongInt): LongInt; stdcall; external OLLYDBG name 'Maybecommand';
+function     Getpackednetint(code:PUChar;size:ULong;value:PULong): ULong; cdecl; external OLLYDBG name 'Getpackednetint';
+procedure    Removeanalysis(base:ULong;size:ULong;keephittrace: LongInt); cdecl; external OLLYDBG name 'Removeanalysis';
+function     Maybecommand(addr:ULong;requireanalysis:LongInt): LongInt; cdecl; external OLLYDBG name 'Maybecommand';
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////// STACK WALK //////////////////////////////////
@@ -3250,31 +3251,31 @@ P_sframe = ^t_sframe;                    // Stack frame descriptor
   {$ENDIF}
 	end;
 
-function     Isretaddr(retaddr:ULong;procaddr:PULong):ULong; stdcall; external OLLYDBG name 'Isretaddr';
-function     Findretaddrdata(pf:P_sframe;base:ULong;size:ULong): LongInt; stdcall; external OLLYDBG name 'Findretaddrdata';
+function     Isretaddr(retaddr:ULong;procaddr:PULong):ULong; cdecl; external OLLYDBG name 'Isretaddr';
+function     Findretaddrdata(pf:P_sframe;base:ULong;size:ULong): LongInt; cdecl; external OLLYDBG name 'Findretaddrdata';
 
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////// KNOWN FUNCTIONS ////////////////////////////////
 Const
 
-NARG           =24;            // Max number of arguments in a function
+NARG           =24;                            // Max number of arguments in a function
 
-ADEC_VALID     =$00000001;     // Value valid
-ADEC_PREDICTED =$00000002;     // Value predicted
-ADEC_CHGNAME   =$00000004;     // Allow name change of substituted arg
-ADEC_MARK      =$00000008;     // (out) Important parameter
+ADEC_VALID     =$00000001;                     // Value valid
+ADEC_PREDICTED =$00000002;                     // Value predicted
+ADEC_CHGNAME   =$00000004;                     // Allow name change of substituted arg
+ADEC_MARK      =$00000008;                     // (out) Important parameter
 
 // Type of argument in the description of function or structure. Note that
 // ARG_STRUCT is allowed only in conjunction with ARG_POINTER.
-ARG_POINTER    =$01;           // Argument is a pointer
-ARG_BASE       =$06;           // Mask to extract base type of argument
-ARG_TYPE       =$00;           // Argument is a type
-ARG_STRUCT     =$02;           // Argument is a structure
-ARG_DIRECT     =$04;           // Argument is a direct string
-ARG_OUT        =$08;           // Pointer to data undefined at call
-ARG_MARK       =$10;           // Important parameter
-ARG_ELLIPSYS   =$20;           // Followed by ellipsys
-ARG_VALID      =$40;           // Must always be set to avoid argx=0
+ARG_POINTER    =$01;                           // Argument is a pointer
+ARG_BASE       =$06;                           // Mask to extract base type of argument
+ARG_TYPE       =$00;                           // Argument is a type
+ARG_STRUCT     =$02;                           // Argument is a structure
+ARG_DIRECT     =$04;                           // Argument is a direct string
+ARG_OUT        =$08;                           // Pointer to data undefined at call
+ARG_MARK       =$10;                           // Important parameter
+ARG_ELLIPSYS   =$20;                           // Followed by ellipsys
+ARG_VALID      =$40;                           // Must always be set to avoid argx=0
 
 ARG_TYPEMASK   =(ARG_POINTER OR ARG_BASE);     // Mask to extract full type
 
@@ -3357,28 +3358,28 @@ P_argloc = ^t_argloc;                          // Information about stack args &
   arg:array[0..NARG-1] of t_arg;
 	end;
 
-function    Getconstantbyname(name:PWChar;value:PULong): LongInt; stdcall; external OLLYDBG name 'Getconstantbyname';
+function    Getconstantbyname(name:PWChar;value:PULong): LongInt; cdecl; external OLLYDBG name 'Getconstantbyname';
 function    Getconstantbyvalue(groupname:PWChar;
-                   value:ULong;name:PWChar): LongInt; stdcall; external OLLYDBG name 'Getconstantbyvalue';
-function    Decodetype(data:ULong;dtype:PWChar;text:PWChar;ntext:LongInt): LongInt; stdcall; external OLLYDBG name 'Decodetype';
+                   value:ULong;name:PWChar): LongInt; cdecl; external OLLYDBG name 'Getconstantbyvalue';
+function    Decodetype(data:ULong;dtype:PWChar;text:PWChar;ntext:LongInt): LongInt; cdecl; external OLLYDBG name 'Decodetype';
 function    Fillcombowithgroup(hw:HWND;groupname:PWChar;
-                   sortbyname:LongInt;select:ULong): LongInt; stdcall; external OLLYDBG name 'Fillcombowithgroup';
-function    Fillcombowithstruct(hw:HWND;prefix:PWChar;select:PWChar): LongInt; stdcall; external OLLYDBG name 'Fillcombowithstruct';
-function    Getrawdata(name:PWChar): P_rawdata; stdcall; external OLLYDBG name 'Getrawdata';
-function    Substitutehkeyprefix(key:PWChar): LongInt; stdcall; external OLLYDBG name 'Substitutehkeyprefix';
+                   sortbyname:LongInt;select:ULong): LongInt; cdecl; external OLLYDBG name 'Fillcombowithgroup';
+function    Fillcombowithstruct(hw:HWND;prefix:PWChar;select:PWChar): LongInt; cdecl; external OLLYDBG name 'Fillcombowithstruct';
+function    Getrawdata(name:PWChar): P_rawdata; cdecl; external OLLYDBG name 'Getrawdata';
+function    Substitutehkeyprefix(key:PWChar): LongInt; cdecl; external OLLYDBG name 'Substitutehkeyprefix';
 function    Decodeknownbyname(name:PWChar;pd:P_procdata;
-                    adec:P_argdec;rettype:PWChar;nexp:integer): LongInt; stdcall; external OLLYDBG name 'Decodeknownbyname';
+                    adec:P_argdec;rettype:PWChar;nexp:integer): LongInt; cdecl; external OLLYDBG name 'Decodeknownbyname';
 function    Decodeknownbyaddr(addr:ULong;pd:P_procdata;adec:P_argdec;rettype:PWChar;name:PWChar;
-                    nexp:integer;follow:integer): LongInt; stdcall; external OLLYDBG name 'Decodeknownbyaddr';
-function    Isnoreturn(addr:ULong): LongInt; stdcall; external OLLYDBG name 'Isnoreturn';
+                    nexp:integer;follow:integer): LongInt; cdecl; external OLLYDBG name 'Decodeknownbyaddr';
+function    Isnoreturn(addr:ULong): LongInt; cdecl; external OLLYDBG name 'Isnoreturn';
 function    Decodeargument(pmod:P_module;prtype:PWChar;data:pointer;
-                    ndata:LongInt;text:PWChar;ntext:LongInt;nontriv:PInteger): LongInt; stdcall; external OLLYDBG name 'Decodeargument';
-function    Getstructureitemcount(name:PWChar;size:PULong): LongInt; stdcall; external OLLYDBG name 'Getstructureitemcount';
-function    Findstructureitembyoffset(name:PWChar;offset:ULong): LongInt; stdcall; external OLLYDBG name 'Findstructureitembyoffset';
+                    ndata:LongInt;text:PWChar;ntext:LongInt;nontriv:PInteger): LongInt; cdecl; external OLLYDBG name 'Decodeargument';
+function    Getstructureitemcount(name:PWChar;size:PULong): LongInt; cdecl; external OLLYDBG name 'Getstructureitemcount';
+function    Findstructureitembyoffset(name:PWChar;offset:ULong): LongInt; cdecl; external OLLYDBG name 'Findstructureitembyoffset';
 function    Decodestructure(name:PWChar;addr:ULong;item0:LongInt;
-                    str:P_strdec;nstr:LongInt): LongInt; stdcall; external OLLYDBG name 'Decodestructure';
+                    str:P_strdec;nstr:LongInt): LongInt; cdecl; external OLLYDBG name 'Decodestructure';
 function    Getstructureitemvalue(code:PUChar;ncode:ULong;
-                    name:PWChar;itemname:PWChar;value:Pointer;nvalue:ULong): ULong; stdcall; external OLLYDBG name 'Getstructureitemvalue';
+                    name:PWChar;itemname:PWChar;value:Pointer;nvalue:ULong): ULong; cdecl; external OLLYDBG name 'Getstructureitemvalue';
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////// EXPRESSIONS, WATCHES AND INSPECTORS /////////////////////
@@ -3436,16 +3437,16 @@ P_watch  = ^t_watch;                  // Watch descriptor
 	end;
 
 function    Cexpression(expression:PWChar;cexpr:PUChar;nexpr:LongInt;
-                   explen:PInteger;err:PWChar;mode:ULong):LongInt; stdcall; external OLLYDBG name 'Cexpression';
-function    Exprcount(cexpr:PUChar):LongInt; stdcall; external OLLYDBG name 'Exprcount';
+                   explen:PInteger;err:PWChar;mode:ULong):LongInt; cdecl; external OLLYDBG name 'Cexpression';
+function    Exprcount(cexpr:PUChar):LongInt; cdecl; external OLLYDBG name 'Exprcount';
 function    Eexpression(result:P_result;expl:PWChar;cexpr:PUChar;
                    index:LongInt;data:PUChar;base:ULong;size:ULong;threadid:ULong;
-                   a:ULong;b:ULong;mode:ULong):LongInt; stdcall; external OLLYDBG name 'Eexpression';
+                   a:ULong;b:ULong;mode:ULong):LongInt; cdecl; external OLLYDBG name 'Eexpression';
 function    Expression(result:P_result;expression:PWChar;data:PUChar;
                    base:ULong;size:ULong;threadid:ULong;a:ULong;b:ULong;
-                   mode:ULong):LongInt; stdcall; external OLLYDBG name 'Expression';
+                   mode:ULong):LongInt; cdecl; external OLLYDBG name 'Expression';
 function    Fastexpression(result:P_result;addr:ULong;ltype:LongInt;
-                   threadid:ULong):LongInt; stdcall; external OLLYDBG name 'Fastexpression';
+                   threadid:ULong):LongInt; cdecl; external OLLYDBG name 'Fastexpression';
 
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////// DIALOGS AND OPTIONS //////////////////////////////
@@ -3634,66 +3635,66 @@ Type
 {typedef int  BROWSECODEFUNC(int,void *,ULong *,PWChar *);}
 BROWSECODEFUNC = function(int:LongInt;void:pointer;zULong:PULong;zpwchar:PWChar): LongInt; cdecl;
 	
-function     Findcontrol(hw:HWND): P_control; stdcall; external OLLYDBG name 'Findcontrol';
-function     Defaultactions(hparent:HWND;pctr:P_control;wp:WPARAM;lp:LPARAM ): LongInt; stdcall; external OLLYDBG name 'Defaultactions';
-procedure    Addstringtocombolist(hc:HWND;s:PWChar); stdcall; external OLLYDBG name 'Addstringtocombolist';
-function     Preparedialog(hw:HWND;pdlg:P_dialog): LongInt; stdcall; external OLLYDBG name 'Preparedialog';
-function     Endotdialog(hw:HWND;result:LongInt): LongInt; stdcall; external OLLYDBG name 'Endotdialog';
+function     Findcontrol(hw:HWND): P_control; cdecl; external OLLYDBG name 'Findcontrol';
+function     Defaultactions(hparent:HWND;pctr:P_control;wp:WPARAM;lp:LPARAM ): LongInt; cdecl; external OLLYDBG name 'Defaultactions';
+procedure    Addstringtocombolist(hc:HWND;s:PWChar); cdecl; external OLLYDBG name 'Addstringtocombolist';
+function     Preparedialog(hw:HWND;pdlg:P_dialog): LongInt; cdecl; external OLLYDBG name 'Preparedialog';
+function     Endotdialog(hw:HWND;result:LongInt): LongInt; cdecl; external OLLYDBG name 'Endotdialog';
 function     Getregister(hparent:HWND;reg:LongInt;data:PULong;letter:LongInt;
-                   x:LongInt;y:LongInt;fi:LongInt;mode:LongInt ): LongInt; stdcall; external OLLYDBG name 'Getregister';
+                   x:LongInt;y:LongInt;fi:LongInt;mode:LongInt ): LongInt; cdecl; external OLLYDBG name 'Getregister';
 function     GetInteger(hparent:HWND;title:PWChar;data:PULong;letter:LongInt ;
-                   x:LongInt;y:LongInt;fi:LongInt;mode:LongInt ): LongInt; stdcall; external OLLYDBG name 'GetInteger';
+                   x:LongInt;y:LongInt;fi:LongInt;mode:LongInt ): LongInt; cdecl; external OLLYDBG name 'GetInteger';
 function     Getdword(hparent:HWND;title:PWChar;data:PULong;letter:LongInt;
-                   x:LongInt;y:LongInt;fi:LongInt;mode:LongInt): LongInt; stdcall; external OLLYDBG name 'Getdword';
+                   x:LongInt;y:LongInt;fi:LongInt;mode:LongInt): LongInt; cdecl; external OLLYDBG name 'Getdword';
 function     Getlasterrorcode(hparent:HWND;title:PWChar;data:PULong;
-                   letter:LongInt;x:LongInt;y:LongInt;fi:LongInt): LongInt; stdcall; external OLLYDBG name 'Getlasterrorcode';
+                   letter:LongInt;x:LongInt;y:LongInt;fi:LongInt): LongInt; cdecl; external OLLYDBG name 'Getlasterrorcode';
 function     Getaddressrange(hparent:HWND;title:PWChar;
-                   rmin:PULong;rmax:PULong;x:LongInt;y:LongInt;fi:LongInt;mode:LongInt): LongInt; stdcall; external OLLYDBG name 'Getaddressrange';
+                   rmin:PULong;rmax:PULong;x:LongInt;y:LongInt;fi:LongInt;mode:LongInt): LongInt; cdecl; external OLLYDBG name 'Getaddressrange';
 function     Getexceptionrange(hparent:HWND;title:PWChar;
-                   rmin:PULong;rmax:PULong;x:LongInt;y:LongInt;fi:LongInt): LongInt; stdcall; external OLLYDBG name 'Getexceptionrange';
+                   rmin:PULong;rmax:PULong;x:LongInt;y:LongInt;fi:LongInt): LongInt; cdecl; external OLLYDBG name 'Getexceptionrange';
 function     Getstructuretype(hparent:HWND;title:PWChar;text:PWChar;
-                   strname:PWChar;x:LongInt;y:LongInt;fi:LongInt): LongInt; stdcall; external OLLYDBG name 'Getstructuretype';
+                   strname:PWChar;x:LongInt;y:LongInt;fi:LongInt): LongInt; cdecl; external OLLYDBG name 'Getstructuretype';
 function     Getfpureg(hparent:HWND ;reg:LongInt;data:pointer;letter:LongInt ;
-                   x:LongInt ;y:LongInt ;fi:LongInt): LongInt; stdcall; external OLLYDBG name 'Getfpureg';
+                   x:LongInt ;y:LongInt ;fi:LongInt): LongInt; cdecl; external OLLYDBG name 'Getfpureg';
 function     Get3dnow(hparent:HWND;title:PWChar;data:pointer;letter:LongInt;
-                   x:LongInt ;y:LongInt;fi:LongInt;mode:LongInt): LongInt; stdcall; external OLLYDBG name 'Get3dnow';
+                   x:LongInt ;y:LongInt;fi:LongInt;mode:LongInt): LongInt; cdecl; external OLLYDBG name 'Get3dnow';
 function     Getfloat(hparent:HWND;title:PWChar;data:pointer;letter:LongInt ;
-                   x:LongInt ;y:LongInt;fi:LongInt;mode:LongInt): LongInt; stdcall; external OLLYDBG name 'Getfloat';
+                   x:LongInt ;y:LongInt;fi:LongInt;mode:LongInt): LongInt; cdecl; external OLLYDBG name 'Getfloat';
 function     Getmmx(hparent:HWND;title:PWChar;data:pointer;letter:LongInt;
-                   x:LongInt;y:LongInt;fi:LongInt): LongInt; stdcall; external OLLYDBG name 'Getmmx';
+                   x:LongInt;y:LongInt;fi:LongInt): LongInt; cdecl; external OLLYDBG name 'Getmmx';
 function     Getsse(hparent:HWND;title:PWChar;data:pointer;letter:LongInt;
-                   x:LongInt;y:LongInt;fi:LongInt;mode:LongInt): LongInt; stdcall; external OLLYDBG name 'Getsse';
+                   x:LongInt;y:LongInt;fi:LongInt;mode:LongInt): LongInt; cdecl; external OLLYDBG name 'Getsse';
 function     Getstring(hparent:HWND;title:PWChar;s:PWChar;length:LongInt;
-                   savetype:LongInt;letter:LongInt;x:LongInt;y:LongInt;fi:LongInt;mode:LongInt): LongInt; stdcall; external OLLYDBG name 'Getstring';
+                   savetype:LongInt;letter:LongInt;x:LongInt;y:LongInt;fi:LongInt;mode:LongInt): LongInt; cdecl; external OLLYDBG name 'Getstring';
 function     Getdwordexpression(hparent:HWND;title:PWChar;u:PULong;
-                   threadid:ULong;savetype:LongInt;x:LongInt;y:LongInt;fi:LongInt ;mode:LongInt): LongInt; stdcall; external OLLYDBG name 'Getdwordexpression';
+                   threadid:ULong;savetype:LongInt;x:LongInt;y:LongInt;fi:LongInt ;mode:LongInt): LongInt; cdecl; external OLLYDBG name 'Getdwordexpression';
 function     Getgotoexpression(hparent:HWND;title:PWChar;u:PULong;
-                   threadid:ULong;savetype:LongInt;x:LongInt;y:LongInt;fi:LongInt;mode:LongInt): LongInt; stdcall; external OLLYDBG name 'Getgotoexpression';
+                   threadid:ULong;savetype:LongInt;x:LongInt;y:LongInt;fi:LongInt;mode:LongInt): LongInt; cdecl; external OLLYDBG name 'Getgotoexpression';
 function     Getasmsearchmodel(hparent:HWND;title:PWChar;model:P_asmmod;
-                   nmodel:LongInt;x:LongInt;y:LongInt;fi:LongInt ;mode:LongInt): LongInt; stdcall; external OLLYDBG name 'Getasmsearchmodel';
+                   nmodel:LongInt;x:LongInt;y:LongInt;fi:LongInt ;mode:LongInt): LongInt; cdecl; external OLLYDBG name 'Getasmsearchmodel';
 function     Getseqsearchmodel(hparent:HWND;title:PWChar;model:P_asmmod;
-                   nmodel:LongInt;x:LongInt;y:LongInt;fi:LongInt ;mode:LongInt): LongInt; stdcall; external OLLYDBG name 'Getseqsearchmodel';
+                   nmodel:LongInt;x:LongInt;y:LongInt;fi:LongInt ;mode:LongInt): LongInt; cdecl; external OLLYDBG name 'Getseqsearchmodel';
 function     Binaryedit(hparent:HWND;title:PWChar;hstr:P_hexstr;
-                   letter:LongInt;x:LongInt;y:LongInt;fi:LongInt;mode:LongInt): LongInt; stdcall; external OLLYDBG name 'Binaryedit';
-function     Getpredefinedtypebyindex(fnindex:LongInt;itype:PWChar): LongInt; stdcall; external OLLYDBG name 'Getpredefinedtypebyindex';
-function     Getindexbypredefinedtype(itype:PWChar): LongInt; stdcall; external OLLYDBG name 'Getindexbypredefinedtype';
+                   letter:LongInt;x:LongInt;y:LongInt;fi:LongInt;mode:LongInt): LongInt; cdecl; external OLLYDBG name 'Binaryedit';
+function     Getpredefinedtypebyindex(fnindex:LongInt;itype:PWChar): LongInt; cdecl; external OLLYDBG name 'Getpredefinedtypebyindex';
+function     Getindexbypredefinedtype(itype:PWChar): LongInt; cdecl; external OLLYDBG name 'Getindexbypredefinedtype';
 function     Condbreakpoint(hparent:HWND;addr:PULong;naddr:LongInt;
-                   title:PWChar;x:LongInt;y:LongInt;fi:LongInt): LongInt; stdcall; external OLLYDBG name 'Condbreakpoint';
+                   title:PWChar;x:LongInt;y:LongInt;fi:LongInt): LongInt; cdecl; external OLLYDBG name 'Condbreakpoint';
 function     Condlogbreakpoint(hparent:HWND;addr:PULong;naddr:LongInt;
-                   fnindex:LongInt;title:PWChar;x:LongInt;y:LongInt;fi:LongInt): LongInt; stdcall; external OLLYDBG name 'Condlogbreakpoint';
+                   fnindex:LongInt;title:PWChar;x:LongInt;y:LongInt;fi:LongInt): LongInt; cdecl; external OLLYDBG name 'Condlogbreakpoint';
 function     Membreakpoint(hparent:HWND;addr:ULong;size:ULong ;
-                   x:LongInt;y:LongInt;fi:LongInt;mode:LongInt): LongInt; stdcall; external OLLYDBG name 'Membreakpoint';
+                   x:LongInt;y:LongInt;fi:LongInt;mode:LongInt): LongInt; cdecl; external OLLYDBG name 'Membreakpoint';
 function     Memlogbreakpoint(hparent:HWND;addr:ULong ;size:ULong ;
-                   x:LongInt;y:LongInt;fi:LongInt;mode:LongInt): LongInt; stdcall; external OLLYDBG name 'Memlogbreakpoint';
+                   x:LongInt;y:LongInt;fi:LongInt;mode:LongInt): LongInt; cdecl; external OLLYDBG name 'Memlogbreakpoint';
 function     Hardbreakpoint(hparent:HWND;addr:ULong;
-                   x:LongInt;y:LongInt;fi:LongInt;mode:LongInt): LongInt; stdcall; external OLLYDBG name 'Hardbreakpoint';
+                   x:LongInt;y:LongInt;fi:LongInt;mode:LongInt): LongInt; cdecl; external OLLYDBG name 'Hardbreakpoint';
 function     Hardlogbreakpoint(hparent:HWND;addr:ULong;fnindex:LongInt ;
-                   x:LongInt;y:LongInt;fi:LongInt;mode:LongInt): LongInt; stdcall; external OLLYDBG name 'Hardlogbreakpoint';
-procedure    Setrtcond(hparent:HWND;x:LongInt;y:LongInt;fi:LongInt); stdcall; external OLLYDBG name 'Setrtcond';
-procedure    Setrtprot(hparent:HWND;x:LongInt;y:LongInt;fi:LongInt); stdcall; external OLLYDBG name 'Setrtprot';
+                   x:LongInt;y:LongInt;fi:LongInt;mode:LongInt): LongInt; cdecl; external OLLYDBG name 'Hardlogbreakpoint';
+procedure    Setrtcond(hparent:HWND;x:LongInt;y:LongInt;fi:LongInt); cdecl; external OLLYDBG name 'Setrtcond';
+procedure    Setrtprot(hparent:HWND;x:LongInt;y:LongInt;fi:LongInt); cdecl; external OLLYDBG name 'Setrtprot';
 function     Browsecodelocations(hparent:HWND;title:PWChar;
-                   bccallback:BROWSECODEFUNC;data:pointer): ULong; stdcall; external OLLYDBG name 'Browsecodelocations';
-function     Fillcombowithcodepages(hw:HWND;select:LongInt): LongInt; stdcall; external OLLYDBG name 'Fillcombowithcodepages';
+                   bccallback:BROWSECODEFUNC;data:pointer): ULong; cdecl; external OLLYDBG name 'Browsecodelocations';
+function     Fillcombowithcodepages(hw:HWND;select:LongInt): LongInt; cdecl; external OLLYDBG name 'Fillcombowithcodepages';
 
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////// PLUGIN OPTIONS ////////////////////////////////
@@ -3773,30 +3774,30 @@ COMM_PROC      =$00000004;     // Add procedure description
 COMM_ALL       =$FFFFFFFF;     // Add all possible comments
 
 function     Stringtotext(data:PWChar;ndata:LongInt;text:PWChar;ntext:LongInt;
-                   stopatzero:LongInt): LongInt; stdcall; external OLLYDBG name 'Stringtotext';
-function     Isstring(addr:ULong;isstatic:LongInt;symb:PWChar;nsymb:LongInt): LongInt; stdcall; external OLLYDBG name 'Isstring';
-function     Squeezename(dest:PWChar;ndest:LongInt;src:PWChar;nsrc:LongInt): LongInt; stdcall; external OLLYDBG name 'Squeezename';
-procedure    Uncapitalize(s:PWChar); stdcall; external OLLYDBG name 'Uncapitalize';
+                   stopatzero:LongInt): LongInt; cdecl; external OLLYDBG name 'Stringtotext';
+function     Isstring(addr:ULong;isstatic:LongInt;symb:PWChar;nsymb:LongInt): LongInt; cdecl; external OLLYDBG name 'Isstring';
+function     Squeezename(dest:PWChar;ndest:LongInt;src:PWChar;nsrc:LongInt): LongInt; cdecl; external OLLYDBG name 'Squeezename';
+procedure    Uncapitalize(s:PWChar); cdecl; external OLLYDBG name 'Uncapitalize';
 function     Decoderelativeoffset(addr:ULong;addrmode:LongInt;
-                   symb:PWChar;nsymb:LongInt): LongInt; stdcall; external OLLYDBG name 'Decoderelativeoffset';
+                   symb:PWChar;nsymb:LongInt): LongInt; cdecl; external OLLYDBG name 'Decoderelativeoffset';
 function     Decodeaddress(addr:ULong;amod:ULong;mode:LongInt;
-                   symb:PWChar;nsymb:LongInt;comment:PWChar): LongInt; stdcall; external OLLYDBG name 'Decodeaddress';
+                   symb:PWChar;nsymb:LongInt;comment:PWChar): LongInt; cdecl; external OLLYDBG name 'Decodeaddress';
 function     Decodearglocal(uip:Long;offs:ULong;datasize:ULong;
-                   name:PWChar;len:LongInt): LongInt; stdcall; external OLLYDBG name 'Decodearglocal';
+                   name:PWChar;len:LongInt): LongInt; cdecl; external OLLYDBG name 'Decodearglocal';
 function     Getanalysercomment(pmod:P_module;addr:ULong;
-                   comment:PWChar;len:LongInt): LongInt; stdcall; external OLLYDBG name 'Getanalysercomment';
-function     Getswitchcomment(addr:ULong;comment:PWChar;len:LongInt): LongInt; stdcall; external OLLYDBG name 'Getswitchcomment';
+                   comment:PWChar;len:LongInt): LongInt; cdecl; external OLLYDBG name 'Getanalysercomment';
+function     Getswitchcomment(addr:ULong;comment:PWChar;len:LongInt): LongInt; cdecl; external OLLYDBG name 'Getswitchcomment';
 function     Getloopcomment(pmod:P_module;addr:ULong;level:LongInt;
-                   comment:PWChar;len:LongInt): LongInt; stdcall; external OLLYDBG name 'Getloopcomment';
+                   comment:PWChar;len:LongInt): LongInt; cdecl; external OLLYDBG name 'Getloopcomment';
 function     Getproccomment(addr:ULong;acall:ULong;
-                   comment:PWChar;len:LongInt;argonly:LongInt): LongInt; stdcall; external OLLYDBG name 'Getproccomment';
+                   comment:PWChar;len:LongInt;argonly:LongInt): LongInt; cdecl; external OLLYDBG name 'Getproccomment';
 function     Commentaddress(addr:ULong;typelist:LongInt;
-                   comment:PWChar;len:LongInt): LongInt; stdcall; external OLLYDBG name 'Commentaddress';
+                   comment:PWChar;len:LongInt): LongInt; cdecl; external OLLYDBG name 'Commentaddress';
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////// LOG WINDOW //////////////////////////////////
 
-procedure   Redrawlist; stdcall; external OLLYDBG name 'Redrawlist';
+procedure   Redrawlist; cdecl; external OLLYDBG name 'Redrawlist';
 procedure   Addtolist(addr:ULong;color:LongInt;format:PWChar); cdecl; varargs; external OLLYDBG name 'Addtolist';
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////// DUMP /////////////////////////////////////
@@ -3887,7 +3888,6 @@ CDS_NOGRAPH    =$00000002;     // Replace graphical symbols by spaces
 
 Type
 P_dump = ^t_dump;                             // Descriptor of dump data and window
-  {typedef void DUMPSELFUNC(struct t_dump *,int); }
   DUMPSELFUNC = procedure(pd:P_dump;mode:LongInt); cdecl;
 
   t_dump = packed record
@@ -3917,23 +3917,23 @@ P_dump = ^t_dump;                             // Descriptor of dump data and win
   dumpselfunc: DUMPSELFUNC;                   // Callback indicating change of sel0
 	end;
 
-procedure    Setdumptype(pd:P_dump;dumptype:ULong ); stdcall; external OLLYDBG name 'Setdumptype';
-function     Ensurememorybackup(pmem:P_memory;makebackup:LongInt): LongInt; stdcall; external OLLYDBG name 'Ensurememorybackup';
-procedure    Backupusercode(pm:P_module;force:LongInt); stdcall; external OLLYDBG name 'Backupusercode';
-function     Copydumpselection(pd:P_dump;mode:LongInt): HGLOBAL; stdcall; external OLLYDBG name 'Copydumpselection';
-function     Dumpback(pd:P_dump;addr:ULong;n:LongInt): ULong; stdcall; external OLLYDBG name 'Dumpback';
-function     Dumpforward(pd:P_dump;addr:ULong;n:LongInt): ULong; stdcall; external OLLYDBG name 'Dumpforward';
-function     Scrolldumpwindow(pd:P_dump;addr:ULong;mode:LongInt): ULong; stdcall; external OLLYDBG name 'Scrolldumpwindow';
-function     Alignselection(pd:P_dump;sel0:PULong;sel1:PULong): LongInt; stdcall; external OLLYDBG name 'Alignselection';
-function     Getproclimits(addr:ULong;amin:PULong;amax:PULong): LongInt; stdcall; external OLLYDBG name 'Getproclimits';
-function     Getextproclimits(addr:ULong;amin:PULong;amax:PULong): LongInt; stdcall; external OLLYDBG name 'Getextproclimits';
-function     Newdumpselection(pd:P_dump;addr:ULong;size:ULong): LongInt; stdcall; external OLLYDBG name 'Newdumpselection';
-function     Findfiledump(path:PWChar):P_dump; stdcall; external OLLYDBG name 'Findfiledump';
+procedure    Setdumptype(pd:P_dump;dumptype:ULong ); cdecl; external OLLYDBG name 'Setdumptype';
+function     Ensurememorybackup(pmem:P_memory;makebackup:LongInt): LongInt; cdecl; external OLLYDBG name 'Ensurememorybackup';
+procedure    Backupusercode(pm:P_module;force:LongInt); cdecl; external OLLYDBG name 'Backupusercode';
+function     Copydumpselection(pd:P_dump;mode:LongInt): HGLOBAL; cdecl; external OLLYDBG name 'Copydumpselection';
+function     Dumpback(pd:P_dump;addr:ULong;n:LongInt): ULong; cdecl; external OLLYDBG name 'Dumpback';
+function     Dumpforward(pd:P_dump;addr:ULong;n:LongInt): ULong; cdecl; external OLLYDBG name 'Dumpforward';
+function     Scrolldumpwindow(pd:P_dump;addr:ULong;mode:LongInt): ULong; cdecl; external OLLYDBG name 'Scrolldumpwindow';
+function     Alignselection(pd:P_dump;sel0:PULong;sel1:PULong): LongInt; cdecl; external OLLYDBG name 'Alignselection';
+function     Getproclimits(addr:ULong;amin:PULong;amax:PULong): LongInt; cdecl; external OLLYDBG name 'Getproclimits';
+function     Getextproclimits(addr:ULong;amin:PULong;amax:PULong): LongInt; cdecl; external OLLYDBG name 'Getextproclimits';
+function     Newdumpselection(pd:P_dump;addr:ULong;size:ULong): LongInt; cdecl; external OLLYDBG name 'Newdumpselection';
+function     Findfiledump(path:PWChar):P_dump; cdecl; external OLLYDBG name 'Findfiledump';
 function     Createdumpwindow(title:PWChar;base:ULong;size:ULong ;path:PWChar;dumptype:ULong;sel0:ULong;sel1:ULong;                   
-                              strname:PWChar): HWND; stdcall; external OLLYDBG name 'Createdumpwindow';
-function     Embeddumpwindow(hw:HWND;pd:P_dump;dumptype:ULong): HWND; stdcall; external OLLYDBG name 'Embeddumpwindow';
+                              strname:PWChar): HWND; cdecl; external OLLYDBG name 'Createdumpwindow';
+function     Embeddumpwindow(hw:HWND;pd:P_dump;dumptype:ULong): HWND; cdecl; external OLLYDBG name 'Embeddumpwindow';
 function     Asmindump(hparent:HWND;title:PWChar;pd:P_dump;letter:LongInt;x:LongInt;y:LongInt;fi:LongInt;
-                       mode:LongInt): LongInt; stdcall; external OLLYDBG name 'Asmindump';
+                       mode:LongInt): LongInt; cdecl; external OLLYDBG name 'Asmindump';
 
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////// SEARCH ////////////////////////////////////
@@ -3991,11 +3991,11 @@ P_search = ^t_search;           // Descriptor of found item
 	end;
 
 function   Comparecommand(cmd:PUChar;cmdsize:ULong;cmdip:ULong;model:P_asmmod;nmodel:LongInt;
-                   pa:PInteger;pb:PInteger;da:P_disasm): ULong; stdcall; external OLLYDBG name 'Comparecommand';
+                   pa:PInteger;pb:PInteger;da:P_disasm): ULong; cdecl; external OLLYDBG name 'Comparecommand';
 function   Comparesequence(cmd:PUChar;cmdsize:ULong;cmdip:ULong;
                    decode:PUChar;model:P_asmmod;nmodel:LongInt;mode:LongInt;
                    pa:PInteger;pb:PInteger;da:P_disasm;amatch:PULong;
-                   namatch:LongInt): ULong; stdcall; external OLLYDBG name 'Comparesequence';
+                   namatch:LongInt): ULong; cdecl; external OLLYDBG name 'Comparesequence';
 
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// PATCHES ////////////////////////////////////
@@ -4070,23 +4070,23 @@ P_bphard = ^t_bphard;                  // Hardware breakpoints
   path:array[0..MAXPATH-1] of WChar;   // Full module name, used by .udd only
 	end;
 
-function     Removeint3breakpoint(addr:ULong;bptype:ULong): LongInt; stdcall; external OLLYDBG name 'Removeint3breakpoint';
+function     Removeint3breakpoint(addr:ULong;bptype:ULong): LongInt; cdecl; external OLLYDBG name 'Removeint3breakpoint';
 function     Setint3breakpoint(addr:ULong;bptype:ULong;fnindex:LongInt;limit:LongInt;count:LongInt;actions:ULong;
-                   condition:PWChar;expression:PWChar;exprtype:PWChar): LongInt; stdcall; external OLLYDBG name 'Setint3breakpoint';
-function     Enableint3breakpoint(addr:ULong;enable:LongInt ): LongInt; stdcall; external OLLYDBG name 'Enableint3breakpoint';
-function     Confirmint3breakpoint(addr:ULong): LongInt; stdcall; external OLLYDBG name 'Confirmint3breakpoint';
-function     Confirmhardwarebreakpoint(addr:ULong): LongInt; stdcall; external OLLYDBG name 'Confirmhardwarebreakpoint';
-function     Confirmint3breakpointlist(addr:PULong;naddr:LongInt): LongInt; stdcall; external OLLYDBG name 'Confirmint3breakpointlist';
-procedure    Wipebreakpointrange(addr0:ULong;addr1:ULong); stdcall; external OLLYDBG name 'Wipebreakpointrange';
-function     Removemembreakpoint(addr:ULong): LongInt; stdcall; external OLLYDBG name 'Removemembreakpoint';
+                   condition:PWChar;expression:PWChar;exprtype:PWChar): LongInt; cdecl; external OLLYDBG name 'Setint3breakpoint';
+function     Enableint3breakpoint(addr:ULong;enable:LongInt ): LongInt; cdecl; external OLLYDBG name 'Enableint3breakpoint';
+function     Confirmint3breakpoint(addr:ULong): LongInt; cdecl; external OLLYDBG name 'Confirmint3breakpoint';
+function     Confirmhardwarebreakpoint(addr:ULong): LongInt; cdecl; external OLLYDBG name 'Confirmhardwarebreakpoint';
+function     Confirmint3breakpointlist(addr:PULong;naddr:LongInt): LongInt; cdecl; external OLLYDBG name 'Confirmint3breakpointlist';
+procedure    Wipebreakpointrange(addr0:ULong;addr1:ULong); cdecl; external OLLYDBG name 'Wipebreakpointrange';
+function     Removemembreakpoint(addr:ULong): LongInt; cdecl; external OLLYDBG name 'Removemembreakpoint';
 function     Setmembreakpoint(addr:ULong;size:ULong;bptype:ULong;limit:LongInt;count:LongInt;condition:PWChar;
-                   expression:PWChar;exprtype:PWChar): LongInt; stdcall; external OLLYDBG name 'Setmembreakpoint';
-function     Enablemembreakpoint(addr:ULong;enable:LongInt ): LongInt; stdcall; external OLLYDBG name 'Enablemembreakpoint';
-function     Removehardbreakpoint(index:LongInt): LongInt; stdcall; external OLLYDBG name 'Removehardbreakpoint';
+                   expression:PWChar;exprtype:PWChar): LongInt; cdecl; external OLLYDBG name 'Setmembreakpoint';
+function     Enablemembreakpoint(addr:ULong;enable:LongInt ): LongInt; cdecl; external OLLYDBG name 'Enablemembreakpoint';
+function     Removehardbreakpoint(index:LongInt): LongInt; cdecl; external OLLYDBG name 'Removehardbreakpoint';
 function     Sethardbreakpoint(index:LongInt;size:ULong;bptype:ULong;fnindex:LongInt;addr:ULong;limit:LongInt;count:LongInt;actions:ULong;
-                   condition:PWChar;expression:PWChar;exprtype:PWChar): LongInt; stdcall; external OLLYDBG name 'Sethardbreakpoint';
-function     Enablehardbreakpoint(index:LongInt;enable:LongInt): LongInt; stdcall; external OLLYDBG name 'Enablehardbreakpoint';
-function     Findfreehardbreakslot(bptype:ULong): LongInt; stdcall; external OLLYDBG name 'Findfreehardbreakslot';
+                   condition:PWChar;expression:PWChar;exprtype:PWChar): LongInt; cdecl; external OLLYDBG name 'Sethardbreakpoint';
+function     Enablehardbreakpoint(index:LongInt;enable:LongInt): LongInt; cdecl; external OLLYDBG name 'Enablehardbreakpoint';
+function     Findfreehardbreakslot(bptype:ULong): LongInt; cdecl; external OLLYDBG name 'Findfreehardbreakslot';
 
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////// CPU //////////////////////////////////////
@@ -4132,20 +4132,20 @@ P_history = ^t_history;                // Walk history data
   hcurr:LongInt;                       // Index of record following actual in h
 	end;
 
-procedure    Redrawcpudisasm; stdcall; external OLLYDBG name 'Redrawcpudisasm';
-procedure    Redrawcpureg; stdcall; external OLLYDBG name 'Redrawcpureg';
-function     Getcputhreadid: ULong; stdcall; external OLLYDBG name 'Getcputhreadid';
-function     Getcpuruntracebackstep: LongInt; stdcall; external OLLYDBG name 'Getcpuruntracebackstep';
-function     Getcpudisasmdump:P_dump; stdcall; external OLLYDBG name 'Getcpudisasmdump';
-function     Getcpudisasmselection: ULong; stdcall; external OLLYDBG name 'Getcpudisasmselection';
-function     Getcpudisasmtable:P_table; stdcall; external OLLYDBG name 'Getcpudisasmtable';
+procedure    Redrawcpudisasm; cdecl; external OLLYDBG name 'Redrawcpudisasm';
+procedure    Redrawcpureg; cdecl; external OLLYDBG name 'Redrawcpureg';
+function     Getcputhreadid: ULong; cdecl; external OLLYDBG name 'Getcputhreadid';
+function     Getcpuruntracebackstep: LongInt; cdecl; external OLLYDBG name 'Getcpuruntracebackstep';
+function     Getcpudisasmdump:P_dump; cdecl; external OLLYDBG name 'Getcpudisasmdump';
+function     Getcpudisasmselection: ULong; cdecl; external OLLYDBG name 'Getcpudisasmselection';
+function     Getcpudisasmtable:P_table; cdecl; external OLLYDBG name 'Getcpudisasmtable';
 procedure    Addtohistory(ph:P_history;threadid:ULong;dumptype:ULong;
-                   addr:ULong;sel0:ULong;sel1:ULong); stdcall; external OLLYDBG name 'Addtohistory';
+                   addr:ULong;sel0:ULong;sel1:ULong); cdecl; external OLLYDBG name 'Addtohistory';
 function     Walkhistory(ph:P_history;dir:LongInt;threadid:PULong;dumptype:PULong;addr:PULong;sel0:PULong;
-                   sel1:PULong): LongInt; stdcall; external OLLYDBG name 'Walkhistory';
-function     Checkhistory(ph:P_history;dir:LongInt;isnewest:PInteger): LongInt; stdcall; external OLLYDBG name 'Checkhistory';                         
+                   sel1:PULong): LongInt; cdecl; external OLLYDBG name 'Walkhistory';
+function     Checkhistory(ph:P_history;dir:LongInt;isnewest:PInteger): LongInt; cdecl; external OLLYDBG name 'Checkhistory';                         
 procedure    Setcpu(threadid:ULong;asmaddr:ULong;dumpaddr:ULong;
-                   selsize:ULong;stackaddr:ULong;mode:LongInt); stdcall; external OLLYDBG name 'Setcpu';
+                   selsize:ULong;stackaddr:ULong;mode:LongInt); cdecl; external OLLYDBG name 'Setcpu';
 
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////// DEBUGGING AND TRACING FUNCTIONS ////////////////////////
@@ -4262,18 +4262,18 @@ P_rtprot = ^t_rtprot;                                  // Run trace protocol con
   range:array[0..NRTPROT-1] of t_range;                // Set of EIP ranges to protocol
 	end;
 
-procedure    Suspendallthreads; stdcall; external OLLYDBG name 'Suspendallthreads';
-procedure    Resumeallthreads; stdcall; external OLLYDBG name 'Resumeallthreads';
-function     Pauseprocess: LongInt; stdcall; external OLLYDBG name 'Pauseprocess';
-function     Closeprocess(confirm:LongInt): LongInt; stdcall; external OLLYDBG name 'Closeprocess';
-function     Detachprocess: LongInt; stdcall; external OLLYDBG name 'Detachprocess';
-function     _Getlasterror(pthr:P_thread;error:PULong;s:PWChar): LongInt; stdcall; external OLLYDBG name 'Getlasterror';
-function     Followcall(addr:ULong): ULong; stdcall; external OLLYDBG name 'Followcall';
-function     Run(status:t_status;pass:LongInt): LongInt; stdcall; external OLLYDBG name 'Run';
-function     Checkfordebugevent: LongInt; stdcall; external OLLYDBG name 'Checkfordebugevent';
-function     Addprotocolrange(addr0:ULong;addr1:ULong): LongInt; stdcall; external OLLYDBG name 'Addprotocolrange';
-function     Getruntrace(nback:LongInt;preg:P_reg;cmd:UChar): LongInt; stdcall; external OLLYDBG name 'Getruntrace';
-function     Findruntracerecord(addr0:ULong;addr1:ULong): LongInt; stdcall; external OLLYDBG name 'Findruntracerecord';
+procedure    Suspendallthreads; cdecl; external OLLYDBG name 'Suspendallthreads';
+procedure    Resumeallthreads; cdecl; external OLLYDBG name 'Resumeallthreads';
+function     Pauseprocess: LongInt; cdecl; external OLLYDBG name 'Pauseprocess';
+function     Closeprocess(confirm:LongInt): LongInt; cdecl; external OLLYDBG name 'Closeprocess';
+function     Detachprocess: LongInt; cdecl; external OLLYDBG name 'Detachprocess';
+function     _Getlasterror(pthr:P_thread;error:PULong;s:PWChar): LongInt; cdecl; external OLLYDBG name 'Getlasterror';
+function     Followcall(addr:ULong): ULong; cdecl; external OLLYDBG name 'Followcall';
+function     Run(status:t_status;pass:LongInt): LongInt; cdecl; external OLLYDBG name 'Run';
+function     Checkfordebugevent: LongInt; cdecl; external OLLYDBG name 'Checkfordebugevent';
+function     Addprotocolrange(addr0:ULong;addr1:ULong): LongInt; cdecl; external OLLYDBG name 'Addprotocolrange';
+function     Getruntrace(nback:LongInt;preg:P_reg;cmd:UChar): LongInt; cdecl; external OLLYDBG name 'Getruntrace';
+function     Findruntracerecord(addr0:ULong;addr1:ULong): LongInt; cdecl; external OLLYDBG name 'Findruntracerecord';
 
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////// LIST OF GUIDS /////////////////////////////////
@@ -4281,8 +4281,8 @@ Const
 
 GUIDSIZE       =16;                   // GUID size, bytes
 
-function     Getguidname(data:UChar;ndata:ULong;name:PWChar): LongInt; stdcall; external OLLYDBG name 'Getguidname';
-function     Isguid(addr:ULong;name:PWChar;nname:LongInt): LongInt; stdcall; external OLLYDBG name 'Isguid';
+function     Getguidname(data:UChar;ndata:ULong;name:PWChar): LongInt; cdecl; external OLLYDBG name 'Getguidname';
+function     Isguid(addr:ULong;name:PWChar;nname:LongInt): LongInt; cdecl; external OLLYDBG name 'Isguid';
 
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// SOURCE CODE //////////////////////////////////
@@ -4320,10 +4320,10 @@ P_source = ^t_source;                 // Descriptor of source file
   lastoffset:LongInt;                 // Last topmost visible line
 	end;
 
-function     Findsource(base:ULong;path:PWChar): P_source; stdcall; external OLLYDBG name 'Findsource';
+function     Findsource(base:ULong;path:PWChar): P_source; cdecl; external OLLYDBG name 'Findsource';
 function     Getsourceline(base:ULong;path:PWChar;line:LongInt;skipspaces:LongInt;text:PWChar;fname:PWChar;extent:PP_srcext;
-						               nextent:PInteger): LongInt; stdcall; external OLLYDBG name 'Getsourceline';
-function     Showsourcecode(base:ULong;path:PWChar;line:LongInt): LongInt; stdcall; external OLLYDBG name 'Showsourcecode';
+						               nextent:PInteger): LongInt; cdecl; external OLLYDBG name 'Getsourceline';
+function     Showsourcecode(base:ULong;path:PWChar;line:LongInt): LongInt; cdecl; external OLLYDBG name 'Showsourcecode';
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// DEBUGGEE ///////////////////////////////////
 Const
@@ -4438,7 +4438,7 @@ t_oddata = record
 	source:PULong;                // List of source files
 	srccode:PULong;               // Source code
 end;
-{
+(*
 t_oddataRS = record
 	///////////////////////////////// DISASSEMBLER /////////////////////////////////
 	bincmd:t_bincmd;              // List of 80x86 commands
@@ -4505,17 +4505,17 @@ t_oddataRS = record
 	thread:t_table;               // Active threads
 	memory:t_table;               // Allocated memory blocks
 	win:t_table;                  // List of windows
-	bpoint:t_table;               // INT3 breakpoints
-	bpmem:t_table;                // Memory breakpoints
-	bppage:t_sorted;              // Memory pages with changed attributes
-	bphard:t_table;               // Hardware breakpoints
+	bpoint:t_table{t_bpoint};     // INT3 breakpoints
+	bpmem:t_table{t_bpmem};       // Memory breakpoints
+	bppage:t_table{t_bppage};     // Memory pages with changed attributes
+	bphard:t_table{t_bphard};     // Hardware breakpoints
 	watch:t_table;                // Watch expressions
 	patch:t_table;                // List of patches from previous runs
 	procdata:t_sorted;            // Descriptions of analyzed procedures
 	source:t_table;               // List of source files
 	srccode:t_table;              // Source code
 end;
-}
+*)
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////// PLUGIN EXPORTS ////////////////////////////////
 Const
@@ -4551,11 +4551,11 @@ var
 	oddt: t_oddata;
 Begin
   try
-	  oddt.bincmd := GetProcAddress(odhmod,'_bincmd');                  // List of 80x86 commands
+	  oddt.bincmd:= GetProcAddress(odhmod,'_bincmd');                   // List of 80x86 commands
 	  oddt.regname:= GetProcAddress(odhmod,'_regname');                 // Names of 8/16/32-bit registers
-    oddt.segname:= GetProcAddress(odhmod,'_segname');                 // Names of segment registers
+      oddt.segname:= GetProcAddress(odhmod,'_segname');                 // Names of segment registers
 	  oddt.fpuname:= GetProcAddress(odhmod,'_fpuname');                 // FPU regs (ST(n) and STn forms)
-    oddt.mmxname:= GetProcAddress(odhmod,'_mmxname');                 // Names of MMX/3DNow! registers
+      oddt.mmxname:= GetProcAddress(odhmod,'_mmxname');                 // Names of MMX/3DNow! registers
 	  oddt.ssename:= GetProcAddress(odhmod,'_ssename');                 // Names of SSE registers
 	  oddt.crname:= GetProcAddress(odhmod,'_crname');                   // Names of control registers
 	  oddt.drname:= GetProcAddress(odhmod,'_drname');                   // Names of debug registers
@@ -4624,7 +4624,7 @@ Begin
 	  oddt.procdata:= GetProcAddress(odhmod,'_procdata');               // Descriptions of analyzed procedures
 	  oddt.source:= GetProcAddress(odhmod,'_source');                   // List of source files
 	  oddt.srccode:= GetProcAddress(odhmod,'_srccode');                 // Source code
-    Result:= oddt;
+	Result:= oddt;
   except
     FillChar(oddt,SizeOf(oddt),0);
     Result:= oddt;
@@ -4690,7 +4690,7 @@ procedure ODBG2_Plugindestroy; cdecl;
 //2.function     Message                    //change to: _Message
 //3.function     Disasm                     //change to: _Disasm
 //4.function     Getlasterror               //change to: _Getlasterror
-//5.
+//5.function     Readfile                   //change to: _Readfile
 //6.
 //...
 // Use oddata:
