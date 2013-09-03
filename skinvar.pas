@@ -91,7 +91,7 @@ Begin
   while (Src[WL] <> #0) do Inc(WL);
   // Get Length of buffer needed ..
   Len:= WideCharToMultiByte(GetACP, 0, Src, WL, Result, 0, nil, nil);
-  Result:= AllocMem(Len);
+  Result:= AllocMem(Len + 2);
   // Convert string and return ..
   WideCharToMultiByte(GetACP, 0, Src, WL, Result, Len, nil, nil);
 End;
