@@ -36,7 +36,7 @@ Unit Plugin2;
 // Porting from Cplus header to unit delphi by quygia128                      //
 // Email: quygia128@gmail.com                                                 //
 // Home: http://cin1team.biz                                                  //
-// Last edit on: 08.27.2013                                                   //
+// Last edit on: 09.14.2013                                                   //
 // Special thanks & Credits go to TQN ~ phpbb3 ~ BOB                          //
 // Greetz to all my friends                                                   //
 // -----                                                                      //
@@ -48,11 +48,11 @@ Unit Plugin2;
 Interface
 
 Uses
-  Windows;
-  {$A1}                                 // Struct byte alignment
-  {$WARN UNSAFE_CODE OFF}
-  {$WARN UNSAFE_TYPE OFF}
-  {$WARN UNSAFE_CAST OFF}
+	Windows;
+	{$A1}                                 // Struct byte alignment
+	{$WARN UNSAFE_CODE OFF}
+	{$WARN UNSAFE_TYPE OFF}
+	{$WARN UNSAFE_CAST OFF}
   
 Const
 	PLUGIN_VERSION =$02010001;            // Version 2.01.0001 of plugin interface
@@ -65,6 +65,8 @@ Const
 	OLLYDBG        ='ollydbg.exe';
 
 Type
+	Char           = AnsiChar;            // Delphi 6,7 SRC Work With Delphi 2009, 2010, XE.x
+	PChar          = PAnsiChar;           // Delphi 6,7 SRC Work With Delphi 2009, 2010, XE.x
 	UChar          = BYTE;
 	UShort         = WORD;
 	UInteger       = Cardinal;
@@ -83,7 +85,6 @@ Const
 PLAINASCII     =$01;            // Plain ASCII character
 DIACRITICAL    =$02;            // Diacritical character
 RAREASCII      =$10;            // Rare ASCII character
-
 // Flags used by Memalloc() and Virtalloc(). Note that Virtalloc() alwyas
 // initializes memory to zero.
 REPORT         =$0000;          // Report memory allocation errors
@@ -92,7 +93,6 @@ ZEROINIT       =$0002;          // Initialize memory to 0
 
 CONT_BROADCAST =$0000;          // Continue sending msg to MDI windows
 STOP_BROADCAST =$1234;          // Stop sending message to MDI windows
-
 // Symbol decoding mode, used by Decodethreadname(), Decodeaddress() and
 // Decoderelativeoffset().
 // Bits that determine when to decode and comment name at all.
@@ -171,8 +171,8 @@ DS_C           =2;              // C style
 
 Type
 
-TCompare   = function(p1:Pointer;p2:Pointer): LongInt; cdecl;
-TCompareex = function(p1:Pointer;p2:Pointer;n:ULong): LongInt; cdecl;
+TCompare       = function(p1:Pointer;p2:Pointer): LongInt; cdecl;
+TCompareex     = function(p1:Pointer;p2:Pointer;n:ULong): LongInt; cdecl;
 
 procedure    Error(format:PWChar); cdecl; varargs; external OLLYDBG name 'Error';
 procedure    Conderror(cond:PWChar;title:PWChar;format:PWChar); cdecl; varargs; external OLLYDBG name 'Conderror';
@@ -188,9 +188,9 @@ procedure    Addtosettings(key:PWChar;value:LongInt); cdecl; external OLLYDBG na
 procedure    Replacegraphs(mode:LongInt;s:PWChar;mask:PUChar;select:LongInt;n:LongInt); cdecl; external OLLYDBG name 'Replacegraphs';
 
 function     Unicodetoascii(const w:PWChar;nw:LongInt;s:char;ns:LongInt): LongInt; cdecl; external OLLYDBG name 'Unicodetoascii';
-function     Asciitounicode(const s:PChar;ns:LongInt;w:PWChar;nw:LongInt): LongInt; cdecl; external OLLYDBG name 'Asciitounicode';
-function     Unicodetoutf(const  w:PWChar;nw:LongInt;t:PChar;nt:LongInt): LongInt; cdecl; external OLLYDBG name 'Unicodetoutf';
-function     Utftounicode(const t:PChar;nt:LongInt;w:PWChar;nw:LongInt): LongInt; cdecl; external OLLYDBG name 'Utftounicode';
+function     Asciitounicode(const s:PAnsiChar;ns:LongInt;w:PWChar;nw:LongInt): LongInt; cdecl; external OLLYDBG name 'Asciitounicode';
+function     Unicodetoutf(const  w:PWChar;nw:LongInt;t:PAnsiChar;nt:LongInt): LongInt; cdecl; external OLLYDBG name 'Unicodetoutf';
+function     Utftounicode(const t:PAnsiChar;nt:LongInt;w:PWChar;nw:LongInt): LongInt; cdecl; external OLLYDBG name 'Utftounicode';
 function     Unicodebuffertoascii(hunicode:HGLOBAL):HGLOBAL; cdecl; external OLLYDBG name 'Unicodebuffertoascii';
 function     Iszero(data:PWChar;n:LongInt): LongInt; cdecl; external OLLYDBG name 'Iszero';
 function     Guidtotext(guid:PUChar;s:PWChar): LongInt; cdecl; external OLLYDBG name 'Guidtotext';
@@ -223,28 +223,28 @@ procedure    Quicktimerflush(timer:LongInt); cdecl; external OLLYDBG name 'Quick
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////// FAST SERVICE ROUTINES WRITTEN IN ASSEMBLER //////////////////
 
-function     StrcopyA(dest:PChar;n:LongInt;const src:PChar): LongInt; cdecl; external OLLYDBG name 'StrcopyA';
+function     StrcopyA(dest:PAnsiChar;n:LongInt;const src:PAnsiChar): LongInt; cdecl; external OLLYDBG name 'StrcopyA';
 function     StrcopyW(dest:PWChar;n:LongInt;const src:PWChar): LongInt; cdecl; external OLLYDBG name 'StrcopyW';
-function     StrlenA(const src:PChar;n:LongInt): LongInt; cdecl; external OLLYDBG name 'StrlenA';
+function     StrlenA(const src:PAnsiChar;n:LongInt): LongInt; cdecl; external OLLYDBG name 'StrlenA';
 function     StrlenW(const src:PWChar;n:LongInt ): LongInt; cdecl; external OLLYDBG name 'StrlenW';
-function     HexprintA(s:PChar;u:ULong): LongInt; cdecl; external OLLYDBG name 'HexprintA';
+function     HexprintA(s:PAnsiChar;u:ULong): LongInt; cdecl; external OLLYDBG name 'HexprintA';
 function     HexprintW(s:PWChar;u:ULong): LongInt; cdecl; external OLLYDBG name 'HexprintW';
-function     Hexprint4A(s:PChar;u:ULong): LongInt; cdecl; external OLLYDBG name 'Hexprint4A';
+function     Hexprint4A(s:PAnsiChar;u:ULong): LongInt; cdecl; external OLLYDBG name 'Hexprint4A';
 function     Hexprint4W(s:PWChar;u:ULong): LongInt; cdecl; external OLLYDBG name 'Hexprint4W';
-function     Hexprint8A(s:PChar;u:ULong): LongInt; cdecl; external OLLYDBG name 'Hexprint8A';
+function     Hexprint8A(s:PAnsiChar;u:ULong): LongInt; cdecl; external OLLYDBG name 'Hexprint8A';
 function     Hexprint8W(s:PWChar;u:ULong): LongInt; cdecl; external OLLYDBG name 'Hexprint8W';
-function     SignedhexA(s:PChar;u:ULong): LongInt; cdecl; external OLLYDBG name 'SignedhexA';
+function     SignedhexA(s:PAnsiChar;u:ULong): LongInt; cdecl; external OLLYDBG name 'SignedhexA';
 function     SignedhexW(s:PWChar;u:ULong): LongInt; cdecl; external OLLYDBG name 'SignedhexW';
 procedure    Swapmem(base:Pointer;size:LongInt;i1:LongInt;i2:LongInt); cdecl; external OLLYDBG name 'Swapmem';
-function     HexdumpA(s:PChar;code:PUChar;n:LongInt): LongInt; cdecl; external OLLYDBG name 'HexdumpA';
+function     HexdumpA(s:PAnsiChar;code:PUChar;n:LongInt): LongInt; cdecl; external OLLYDBG name 'HexdumpA';
 function     HexdumpW(s:PWChar;code:PUChar;n:LongInt): LongInt; cdecl; external OLLYDBG name 'HexdumpW';
 function     Bitcount(u:ULong): LongInt; cdecl; external OLLYDBG name 'Bitcount';
 
-function  	 SetcaseA(s:PChar): Pointer; cdecl; external OLLYDBG name 'SetcaseA';
+function  	 SetcaseA(s:PAnsiChar): Pointer; cdecl; external OLLYDBG name 'SetcaseA';
 function 	   SetcaseW(s:PWChar): Pointer; cdecl; external OLLYDBG name 'SetcaseW';
-function     StrcopycaseA(dest:PChar; n:LongInt;const src:Pchar): LongInt; cdecl; external OLLYDBG name 'StrcopycaseA';
+function     StrcopycaseA(dest:PAnsiChar; n:LongInt;const src:PAnsiChar): LongInt; cdecl; external OLLYDBG name 'StrcopycaseA';
 function     StrcopycaseW(dest:PWChar; n:LongInt;const src:PWChar): LongInt; cdecl; external OLLYDBG name 'StrcopycaseW';
-function     StrnstrA(data:PChar;ndata:LongInt;pat:PChar;npat:LongInt;ignorecase:LongInt): LongInt; cdecl; external OLLYDBG name 'StrnstrA';                  
+function     StrnstrA(data:PAnsiChar;ndata:LongInt;pat:PAnsiChar;npat:LongInt;ignorecase:LongInt): LongInt; cdecl; external OLLYDBG name 'StrnstrA';                  
 function     StrnstrW(data:PWChar; ndata:LongInt;pat:PWChar; npat:LongInt; ignorecase:LongInt): LongInt; cdecl; external OLLYDBG name 'StrnstrW';                      
 //function     StrcmpW(const s1:PWChar;const s2:PWChar): LongInt; cdecl; external OLLYDBG name 'StrcmpW';
 function     Div64by32(low:ULong;hi:ULong;zdiv:ULong): LongInt; cdecl; external OLLYDBG name 'Div64by32';
@@ -332,11 +332,11 @@ P_tagfile= ^t_tagfile;           // Descriptor of tagged file (reading)
     recsize:ULong;               // Size of next accessed record
 	end;
 
-function    Createtaggedfile(name:PWChar;signature:PChar;version:ULong): P_file; cdecl; external OLLYDBG name 'Createtaggedfile';
+function    Createtaggedfile(name:PWChar;signature:PAnsiChar;version:ULong): P_file; cdecl; external OLLYDBG name 'Createtaggedfile';
 function    Savetaggedrecord(f:P_file;tag:ULong;size:ULong;data:Pointer): LongInt; cdecl; external OLLYDBG name 'Savetaggedrecord';
 function    Savepackedrecord(f:P_file;tag:ULong;size:ULong;data:Pointer): LongInt; cdecl; external OLLYDBG name 'Savepackedrecord';
 procedure   Finalizetaggedfile(f:P_file); cdecl; external OLLYDBG name 'Finalizetaggedfile';
-function    Opentaggedfile(tf:P_tagfile;name:PWChar;signature:PChar): LongInt; cdecl; external OLLYDBG name 'Opentaggedfile';
+function    Opentaggedfile(tf:P_tagfile;name:PWChar;signature:PAnsiChar): LongInt; cdecl; external OLLYDBG name 'Opentaggedfile';
 function    Gettaggedrecordsize(tf:P_tagfile;tag:PULong;size:PULong): LongInt; cdecl; external OLLYDBG name 'Gettaggedrecordsize';
 function    Gettaggedfiledata(tf:P_tagfile;buf:Pointer;bufsize:ULong): ULong; cdecl; external OLLYDBG name 'Gettaggedfiledata';
 procedure   Closetaggedfile(tf:P_tagfile); cdecl; external OLLYDBG name 'Closetaggedfile';
@@ -1408,8 +1408,8 @@ P_menu  = ^t_menu;                 // Menu descriptor
 
 t_menu_union = record
   case BYTE of
-	0: (index: ULong);               // Argument passed to menu function
-	1: (hsubmenu: HMENU);            // Handle of pulldown menu
+    0: (index: ULong);             // Argument passed to menu function
+    1: (hsubmenu: HMENU);          // Handle of pulldown menu
   end;
 
 MENUFUNC = function(table:P_table;text:PWChar;index:ULong;mode:LongInt): LongInt; cdecl;
@@ -4310,7 +4310,7 @@ P_source = ^t_source;                 // Descriptor of source file
   stype:ULong;                        // Type, TY_xxx+SRC_xxx
   path:array[0..MAXPATH-1] of WChar;  // File path
   nameoffs:LongInt;                   // Name offset in path, characters
-  text:PChar;                         // Source code in UTF-8 format or NULL
+  text:PAnsiChar;                         // Source code in UTF-8 format or NULL
   line:P_srcline;                     // nline+1 line descriptors or NULL
   nline:LongInt;                      // Number of lines (0: as yet unknown)
   extent:P_srcext;                    // List of code extents
@@ -4698,7 +4698,7 @@ procedure ODBG2_Plugindestroy; cdecl;
 //  function  ODBG2_Plugininit: LongInt; cdecl;
 //  Begin
 //    oddata:= Getoddata(GetModuleHandleA(nil)); // if not oddata = nil;
-//    MessageBox(oddata.hwollymain^,'lpText','lpCaption',MB_OK); // For test
+//    MessageBoxW(oddata.hwollymain^,'lpText','lpCaption',MB_OK); // For test
 //    Result:= 0;
 //  End;
 //
